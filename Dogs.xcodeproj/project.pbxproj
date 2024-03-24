@@ -8,17 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		C6BAB16A2BB074BB00F158C6 /* DogsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BAB1692BB074BB00F158C6 /* DogsApp.swift */; };
-		C6BAB16C2BB074BB00F158C6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BAB16B2BB074BB00F158C6 /* ContentView.swift */; };
+		C6BAB16C2BB074BB00F158C6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BAB16B2BB074BB00F158C6 /* MainView.swift */; };
 		C6BAB16E2BB074BC00F158C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6BAB16D2BB074BC00F158C6 /* Assets.xcassets */; };
 		C6BAB1712BB074BC00F158C6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6BAB1702BB074BC00F158C6 /* Preview Assets.xcassets */; };
+		C6BAB17B2BB0750B00F158C6 /* BreedsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BAB17A2BB0750B00F158C6 /* BreedsListView.swift */; };
+		C6BAB17E2BB0757000F158C6 /* FavoritesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BAB17D2BB0757000F158C6 /* FavoritesListView.swift */; };
+		C6BAB1802BB07C0800F158C6 /* NetworkResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BAB17F2BB07C0800F158C6 /* NetworkResponses.swift */; };
+		C6BAB1822BB0867E00F158C6 /* BreedsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BAB1812BB0867E00F158C6 /* BreedsRouter.swift */; };
+		C6BAB1852BB0881900F158C6 /* DogsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BAB1842BB0881900F158C6 /* DogsListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C6BAB1662BB074BB00F158C6 /* Dogs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dogs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6BAB1692BB074BB00F158C6 /* DogsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogsApp.swift; sourceTree = "<group>"; };
-		C6BAB16B2BB074BB00F158C6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		C6BAB16B2BB074BB00F158C6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		C6BAB16D2BB074BC00F158C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C6BAB1702BB074BC00F158C6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C6BAB17A2BB0750B00F158C6 /* BreedsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedsListView.swift; sourceTree = "<group>"; };
+		C6BAB17D2BB0757000F158C6 /* FavoritesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListView.swift; sourceTree = "<group>"; };
+		C6BAB17F2BB07C0800F158C6 /* NetworkResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponses.swift; sourceTree = "<group>"; };
+		C6BAB1812BB0867E00F158C6 /* BreedsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedsRouter.swift; sourceTree = "<group>"; };
+		C6BAB1842BB0881900F158C6 /* DogsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogsListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +62,12 @@
 			isa = PBXGroup;
 			children = (
 				C6BAB1692BB074BB00F158C6 /* DogsApp.swift */,
-				C6BAB16B2BB074BB00F158C6 /* ContentView.swift */,
+				C6BAB17F2BB07C0800F158C6 /* NetworkResponses.swift */,
+				C6BAB16B2BB074BB00F158C6 /* MainView.swift */,
+				C6BAB1812BB0867E00F158C6 /* BreedsRouter.swift */,
+				C6BAB17C2BB0755D00F158C6 /* Favorites */,
+				C6BAB1772BB074CB00F158C6 /* BreedsList */,
+				C6BAB1832BB087E200F158C6 /* DogsList */,
 				C6BAB16D2BB074BC00F158C6 /* Assets.xcassets */,
 				C6BAB16F2BB074BC00F158C6 /* Preview Content */,
 			);
@@ -65,6 +80,30 @@
 				C6BAB1702BB074BC00F158C6 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C6BAB1772BB074CB00F158C6 /* BreedsList */ = {
+			isa = PBXGroup;
+			children = (
+				C6BAB17A2BB0750B00F158C6 /* BreedsListView.swift */,
+			);
+			path = BreedsList;
+			sourceTree = "<group>";
+		};
+		C6BAB17C2BB0755D00F158C6 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				C6BAB17D2BB0757000F158C6 /* FavoritesListView.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		C6BAB1832BB087E200F158C6 /* DogsList */ = {
+			isa = PBXGroup;
+			children = (
+				C6BAB1842BB0881900F158C6 /* DogsListView.swift */,
+			);
+			path = DogsList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +176,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6BAB16C2BB074BB00F158C6 /* ContentView.swift in Sources */,
+				C6BAB17E2BB0757000F158C6 /* FavoritesListView.swift in Sources */,
+				C6BAB16C2BB074BB00F158C6 /* MainView.swift in Sources */,
+				C6BAB1802BB07C0800F158C6 /* NetworkResponses.swift in Sources */,
+				C6BAB1852BB0881900F158C6 /* DogsListView.swift in Sources */,
+				C6BAB17B2BB0750B00F158C6 /* BreedsListView.swift in Sources */,
 				C6BAB16A2BB074BB00F158C6 /* DogsApp.swift in Sources */,
+				C6BAB1822BB0867E00F158C6 /* BreedsRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
