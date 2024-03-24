@@ -20,12 +20,14 @@ class DogsListViewModel: ObservableObject {
         do {
             let (data, _) = try await URLSession.shared.data(from: URL(string: "https://dog.ceo/api/breed/\(breed.name)/images")!)
             let dogsURLs = try JSONDecoder().decode(DogResponse.self, from: data).images.map { URL(string: $0)! }
+            var tempImages = [UIImage]()
             for url in dogsURLs {
                 let (data, _) = try await URLSession.shared.data(from: url)
                 if let image = UIImage(data: data) {
-                    dogsImages.append(image)
+                    tempImages.append(image)
                 }
             }
+            dogsImages = tempImages
         } catch {
             print(error.localizedDescription)
         }
