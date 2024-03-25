@@ -8,53 +8,43 @@
 import SwiftUI
 import Combine
 
-@MainActor
-class BreedsListViewModel: ObservableObject {
-    var subscriptions = Set<AnyCancellable>()
-    var goNext = PassthroughSubject<Breed, Never>()
-    
-    @Published var breeds = [Breed]()
-    
-    func fetchBreeds() async {
-        do {
-            let (data, _) = try await URLSession.shared.data(from: URL(string: "https://dog.ceo/api/breeds/list/all")!)
-            breeds = try JSONDecoder().decode(BreedsResponse.self, from: data).breeds.sorted(by: { $0.name < $1.name })
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-}
-
 struct BreedsListView: View {
-    @ObservedObject var viewModel: BreedsListViewModel
-    
+    @State var store: BreedsStore
     
     var body: some View {
-        List(viewModel.breeds, id: \.name) { breed in
-            Button(
-                action: {
-                    viewModel.goNext.send(breed)
-                },
-                label: {
-                    HStack {
-                        Text(breed.name.capitalized)
-                            .fontWeight(.medium)
-                            .font(.title3)
-                        Spacer()
-                        Image(systemName: "chevron.right.circle.fill")
-                            .foregroundColor(.cyan)
-                    }
+        VStack(spacing: 0) {
+            if store.state.isLoading {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 48)
+            } else {
+                List(store.state.breeds, id: \.name) { breed in
+                    Button(
+                        action: {
+                            store.send(.open(breed))
+                        },
+                        label: {
+                            HStack {
+                                Text(breed.name.capitalized)
+                                    .fontWeight(.medium)
+                                    .font(.title3)
+                                Spacer()
+                                Image(systemName: "chevron.right.circle.fill")
+                                    .foregroundColor(.cyan)
+                            }
+                        }
+                    )
+                    .tint(.black)
                 }
-            )
-            .tint(.black)
-            
+            }
         }
-        .task {
-            await viewModel.fetchBreeds()
+        .onAppear {
+            store.send(.onAppear)
         }
     }
 }
 
 #Preview {
-    BreedsListView(viewModel: BreedsListViewModel())
+    BreedsListView(store: BreedsStore(environment: BreedsEnvironment()))
 }

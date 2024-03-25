@@ -21,9 +21,7 @@ enum Screen: Hashable {
         }
     }
     
-    func hash(into hasher: inout Hasher) {
-        
-    }
+    func hash(into hasher: inout Hasher) { }
     
     case breeds
     case dogs(Breed)
@@ -48,19 +46,21 @@ class BreedsRouter: ObservableObject {
     }
     
     private func pushBreedsListView() -> AnyView {
-        let viewModel = BreedsListViewModel()
+        let environment = BreedsEnvironment()
         
-        viewModel.goNext.sink { [weak self] breed in
+        environment.goNext.receive(on: DispatchQueue.main).sink { [weak self] breed in
             self?.navPath.append(Screen.dogs(breed))
         }
-        .store(in: &viewModel.subscriptions)
+        .store(in: &environment.subscriptions)
         
-        return BreedsListView(viewModel: viewModel).toAnyView
+        let store = BreedsStore(environment: environment)
+        
+        return BreedsListView(store: store).toAnyView
     }
     
     private func pushDogsListView(breed: Breed) -> AnyView {
-        let viewModel = DogsListViewModel(breed: breed)
-        return DogsListView(viewModel: viewModel).toAnyView
+        let store = DogsStore(breed: breed)
+        return DogsListView(store: store).toAnyView
     }
 }
 
@@ -74,10 +74,6 @@ struct BreedsRouterView: View {
                 }
         }
     }
-}
-
-#Preview {
-    BreedsRouterView(router: BreedsRouter())
 }
 
 extension View {
