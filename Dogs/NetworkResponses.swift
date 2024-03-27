@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import UIKit
+import SwiftData
 
 struct BreedsResponse: Codable {
     private var message: [String: [String]]
@@ -27,5 +29,15 @@ struct DogResponse: Codable {
 }
 
 struct Breed: Codable {
-    var name: String
+    let name: String
+}
+
+@Model
+class Dog: Identifiable, Equatable {
+    let id: String
+    let data: Data
+    init(id: String, data: Data) {
+        self.id = id
+        self.data = data
+    }
 }

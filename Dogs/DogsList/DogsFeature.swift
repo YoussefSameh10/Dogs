@@ -7,19 +7,20 @@
 
 import Foundation
 import UIKit
+import SwiftData
 
 @MainActor
 @Observable final class DogsStore {
     var state: DogsState
     private let breed: Breed
     private let reducer: DogsReducer
-    private var environment: DogsEnvironment
+    private let environment: DogsEnvironment
     
     init(breed: Breed, reducer: DogsReducer = DogsReducer(), environment: DogsEnvironment = DogsEnvironment()) {
+        self.environment = environment
         self.state = DogsState(breed: breed)
         self.breed = breed
         self.reducer = reducer
-        self.environment = environment
     }
     
     func send(_ action: DogsAction) {
@@ -31,53 +32,104 @@ import UIKit
             }
         }
     }
+    
+    func isFavorite(dog: DogViewModel) -> Bool {
+        print("isFavorite --- DOG: \(dog.id)")
+        print("isFavorite --- FAVORITES: \(state.favoriteDogs.compactMap { $0.id })")
+        return state.favoriteDogs.contains(where: { $0.id == dog.id })
+    }
 }
 
 struct DogsState {
     let breed: Breed
-    var dogs = [UIImage]()
+    var dogs = [DogViewModel]()
+    var favoriteDogs = [DogViewModel]()
     var isLoading = true
 }
 
 enum DogsAction {
     case onAppear
-    case loaded([UIImage])
-//    case addToFavorites(Data)
+    case loaded(dogs: [DogViewModel], favoriteDogs: [DogViewModel])
+//    case tapDog(DogViewModel)
+    case addToFavorites(DogViewModel)
 }
 
 struct DogsEnvironment {
-    func fetchDogs(breed: Breed) async throws -> [Data] {
+    var container: ModelContainer? = nil
+    
+    init() {
+        do {
+            container = try ModelContainer(for: Dog.self)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    func fetchDogs(breed: Breed) async throws -> [DogViewModel] {
         let (data, _) = try await URLSession.shared.data(from: URL(string: "https://dog.ceo/api/breed/\(breed.name)/images")!)
         let dogsURLs = try JSONDecoder().decode(DogResponse.self, from: data).images.map { URL(string: $0)! }
         
         return try await withThrowingTaskGroup(of: Data.self) { group in
-            var dogs = [Data]()
+            var dogs = [DogViewModel?]()
             for url in dogsURLs {
-                group.addTask {
-                    try await URLSession.shared.data(from: url).0
-                }
+                let data = try await URLSession.shared.data(from: url).0
+                dogs.append(data.toDog(id: url.absoluteString))
             }
-            for try await data in group {
-                dogs.append(data)
-            }
-            return dogs
+            
+            return dogs.compactMap { $0 }
         }
+    }
+    
+    func addToFavorites(dog: DogViewModel) async {
+        guard let data = dog.image.pngData() else { return }
+        await container?.mainContext.insert(Dog(id: dog.id,data: data))
+    }
+    
+    func removeFromFavorites(dog: DogViewModel) async {
+        guard let data = dog.image.pngData() else { return }
+        guard let dogToDelete = try? await container?.mainContext.fetch(FetchDescriptor<Dog>()).first(where: { $0.id == dog.id }) else { return }
+        await container?.mainContext.delete(dogToDelete)
+    }
+    
+    func getFavoriteDogs() async -> [DogViewModel] {
+        let dogs = try? await container?.mainContext.fetch(FetchDescriptor<Dog>())
+        return dogs?.compactMap { $0.data.toDog(id: $0.id) } ?? []
     }
 }
 
 struct DogsReducer {
     func reduce(_ state: DogsState, _ action: DogsAction, _ environment: DogsEnvironment) async throws -> DogsState {
+        print(Thread.current)
         switch action {
         case .onAppear:
             var newState = state
             newState.isLoading = true
-            let dogs = try await environment.fetchDogs(breed: state.breed).compactMap { UIImage(data: $0) }
-            return try await reduce(newState, .loaded(dogs), environment)
-        case .loaded(let dogs):
+            let dogs = try await environment.fetchDogs(breed: state.breed)
+            let favoriteDogs = await environment.getFavoriteDogs()
+            return try await reduce(newState, .loaded(dogs: dogs, favoriteDogs: favoriteDogs), environment)
+        case .loaded(let dogs, let favoriteDogs):
             var newState = state
             newState.dogs = dogs
+            newState.favoriteDogs = favoriteDogs
             newState.isLoading = false
             return newState
+        case .addToFavorites(let dog):
+            var newState = state
+            if newState.favoriteDogs.contains(where: { $0.id == dog.id }) {
+                newState.favoriteDogs.removeAll(where: { $0.id == dog.id })
+                await environment.removeFromFavorites(dog: dog)
+                
+                return newState
+            }
+            newState.favoriteDogs.append(dog)
+            await environment.addToFavorites(dog: dog)
+            return newState
         }
+    }
+}
+
+extension Data {
+    func toDog(id: String) -> DogViewModel? {
+        guard let image = UIImage(data: self) else { return nil }
+        return DogViewModel(id: id, image: image)
     }
 }
