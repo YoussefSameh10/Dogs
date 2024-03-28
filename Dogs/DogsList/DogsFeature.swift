@@ -34,8 +34,6 @@ import SwiftData
     }
     
     func isFavorite(dog: DogViewModel) -> Bool {
-        print("isFavorite --- DOG: \(dog.id)")
-        print("isFavorite --- FAVORITES: \(state.favoriteDogs.compactMap { $0.id })")
         return state.favoriteDogs.contains(where: { $0.id == dog.id })
     }
 }
@@ -98,7 +96,6 @@ struct DogsEnvironment {
 
 struct DogsReducer {
     func reduce(_ state: DogsState, _ action: DogsAction, _ environment: DogsEnvironment) async throws -> DogsState {
-        print(Thread.current)
         switch action {
         case .onAppear:
             var newState = state

@@ -17,7 +17,7 @@ struct MainView: View {
                         Text("All")
                     }
                 }
-            FavoritesListView()
+            FavoritesListView(store: FavoritesStore())
                 .tabItem {
                     VStack {
                         Image(systemName: "star.fill")

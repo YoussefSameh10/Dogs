@@ -47,7 +47,7 @@ struct DogsListView: View {
     }
 }
 
-private struct DogView: View {
+struct DogView: View {
     var dog: DogViewModel
     var isFavorite: Bool
     var onTapImage: () -> ()

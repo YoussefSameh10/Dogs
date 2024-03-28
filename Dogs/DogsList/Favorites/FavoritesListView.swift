@@ -8,11 +8,31 @@
 import SwiftUI
 
 struct FavoritesListView: View {
+    @State var store: FavoritesStore
+    
     var body: some View {
-        Text("Favorites List")
+        ScrollView {
+            if store.state.isLoading {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 48)
+            } else {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: UIScreen.main.bounds.width/2 - 4))], spacing: 8) {
+                    ForEach(store.state.favoriteDogs) { dog in
+                        DogView(
+                            dog: dog,
+                            isFavorite: store.isFavorite(dog: dog),
+                            onTapImage: {  },
+                            onTapFavorite: { store.send(.tapFavorite(dog)) }
+                        )
+                    }
+                }
+            }
+        }
+        .background(content: { Color.gray.opacity(0.2) })
+        .onAppear {
+            store.send(.onAppear)
+        }
     }
-}
-
-#Preview {
-    FavoritesListView()
 }
