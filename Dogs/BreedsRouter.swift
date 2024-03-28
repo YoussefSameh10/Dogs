@@ -10,21 +10,26 @@ import SwiftUI
 enum Screen: Hashable {
     static func == (lhs: Screen, rhs: Screen) -> Bool {
         switch (lhs, rhs) {
-        case (.breeds, .breeds):
+        case (.breedsList, .breedsList):
             return true
-        case let(.dogs(lhsBreed), .dogs(rhsBreed)):
+        case let(.dogsList(lhsBreed), .dogsList(rhsBreed)):
             return lhsBreed.name == rhsBreed.name
-        case (.dogs(_), .breeds):
+        case (.dogsList(_), .breedsList):
             return false
-        case (.breeds, .dogs(_)):
+        case (.breedsList, .dogsList(_)):
+            return false
+        case (.dog(let dog), _):
+            return false
+        case (_, .dog(let dog)):
             return false
         }
     }
     
     func hash(into hasher: inout Hasher) { }
     
-    case breeds
-    case dogs(Breed)
+    case breedsList
+    case dogsList(Breed)
+    case dog(DogViewModel)
 }
 
 @MainActor
@@ -38,18 +43,20 @@ class BreedsRouter: ObservableObject {
     
     func screenFor(_ screen: Screen) -> AnyView {
         switch screen {
-        case .breeds:
+        case .breedsList:
             pushBreedsListView()
-        case .dogs(let breed):
+        case .dogsList(let breed):
             pushDogsListView(breed: breed)
+        case .dog(let dog):
+            pushDogView(dog: dog)
         }
     }
     
     private func pushBreedsListView() -> AnyView {
-        let environment = BreedsEnvironment()
+        var environment = BreedsEnvironment()
         
         environment.goNext.receive(on: DispatchQueue.main).sink { [weak self] breed in
-            self?.navPath.append(Screen.dogs(breed))
+            self?.navPath.append(Screen.dogsList(breed))
         }
         .store(in: &environment.subscriptions)
         
@@ -59,8 +66,19 @@ class BreedsRouter: ObservableObject {
     }
     
     private func pushDogsListView(breed: Breed) -> AnyView {
-        let store = DogsStore(breed: breed)
+        var environment = DogsEnvironment()
+        
+        environment.goNext.receive(on: DispatchQueue.main).sink { [weak self] dog in
+            self?.navPath.append(Screen.dog(dog))
+        }
+        .store(in: &environment.subscriptions)
+        
+        let store = DogsStore(breed: breed, environment: environment)
         return DogsListView(store: store).toAnyView
+    }
+    
+    private func pushDogView(dog: DogViewModel) -> AnyView {
+        return DogView(dog: dog, isFavorite: false, onTapDog: { }, onTapFavorite: { }).toAnyView
     }
 }
 

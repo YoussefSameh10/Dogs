@@ -42,7 +42,7 @@ enum BreedsAction {
     case open(Breed)
 }
 
-class BreedsEnvironment {
+struct BreedsEnvironment {
     var goNext = PassthroughSubject<Breed, Never>()
     var subscriptions = Set<AnyCancellable>()
     func fetchBreeds() async throws -> [Breed] {

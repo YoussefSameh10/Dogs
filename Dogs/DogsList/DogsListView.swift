@@ -33,8 +33,8 @@ struct DogsListView: View {
                         DogView(
                             dog: dog,
                             isFavorite: store.isFavorite(dog: dog),
-                            onTapImage: {  },
-                            onTapFavorite: { store.send(.addToFavorites(dog)) }
+                            onTapDog: { store.send(.tapDog(dog)) },
+                            onTapFavorite: { store.send(.tapFavorites(dog)) }
                         )
                     }
                 }
@@ -50,7 +50,7 @@ struct DogsListView: View {
 struct DogView: View {
     var dog: DogViewModel
     var isFavorite: Bool
-    var onTapImage: () -> ()
+    var onTapDog: () -> ()
     var onTapFavorite: () -> ()
     
     var body: some View {
@@ -59,6 +59,9 @@ struct DogView: View {
                 .resizable()
                 .frame(width: UIScreen.main.bounds.width/2 - 4, height: 150)
                 .scaledToFit()
+                .onTapGesture {
+                    onTapDog()
+                }
             
             Image(systemName: favoriteImageName)
                 .foregroundStyle(Color.red)

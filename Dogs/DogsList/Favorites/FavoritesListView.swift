@@ -23,7 +23,7 @@ struct FavoritesListView: View {
                         DogView(
                             dog: dog,
                             isFavorite: store.isFavorite(dog: dog),
-                            onTapImage: {  },
+                            onTapDog: {  },
                             onTapFavorite: { store.send(.tapFavorite(dog)) }
                         )
                     }

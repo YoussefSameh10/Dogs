@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SwiftData
+import Combine
 
 @MainActor
 @Observable final class DogsStore {
@@ -48,12 +49,15 @@ struct DogsState {
 enum DogsAction {
     case onAppear
     case loaded(dogs: [DogViewModel], favoriteDogs: [DogViewModel])
-//    case tapDog(DogViewModel)
-    case addToFavorites(DogViewModel)
+    case tapDog(DogViewModel)
+    case tapFavorites(DogViewModel)
 }
 
 struct DogsEnvironment {
     var container: ModelContainer? = nil
+    
+    var goNext = PassthroughSubject<DogViewModel,Never>()
+    var subscriptions = Set<AnyCancellable>()
     
     init() {
         do {
@@ -96,21 +100,22 @@ struct DogsEnvironment {
 
 struct DogsReducer {
     func reduce(_ state: DogsState, _ action: DogsAction, _ environment: DogsEnvironment) async throws -> DogsState {
+        var newState = state
         switch action {
         case .onAppear:
-            var newState = state
             newState.isLoading = true
             let dogs = try await environment.fetchDogs(breed: state.breed)
             let favoriteDogs = await environment.getFavoriteDogs()
             return try await reduce(newState, .loaded(dogs: dogs, favoriteDogs: favoriteDogs), environment)
         case .loaded(let dogs, let favoriteDogs):
-            var newState = state
             newState.dogs = dogs
             newState.favoriteDogs = favoriteDogs
             newState.isLoading = false
             return newState
-        case .addToFavorites(let dog):
-            var newState = state
+        case .tapDog(let dog):
+            environment.goNext.send(dog)
+            return newState
+        case .tapFavorites(let dog):
             if newState.favoriteDogs.contains(where: { $0.id == dog.id }) {
                 newState.favoriteDogs.removeAll(where: { $0.id == dog.id })
                 await environment.removeFromFavorites(dog: dog)
