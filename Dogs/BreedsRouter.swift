@@ -7,31 +7,6 @@
 
 import SwiftUI
 
-enum Screen: Hashable {
-    static func == (lhs: Screen, rhs: Screen) -> Bool {
-        switch (lhs, rhs) {
-        case (.breedsList, .breedsList):
-            return true
-        case let(.dogsList(lhsBreed), .dogsList(rhsBreed)):
-            return lhsBreed.name == rhsBreed.name
-        case (.dogsList(_), .breedsList):
-            return false
-        case (.breedsList, .dogsList(_)):
-            return false
-        case (.dog(let dog), _):
-            return false
-        case (_, .dog(let dog)):
-            return false
-        }
-    }
-    
-    func hash(into hasher: inout Hasher) { }
-    
-    case breedsList
-    case dogsList(Breed)
-    case dog(DogViewModel)
-}
-
 @MainActor
 class BreedsRouter: ObservableObject {
     @Published var navPath = NavigationPath()
@@ -41,6 +16,31 @@ class BreedsRouter: ObservableObject {
         firstScreen = pushBreedsListView()
     }
     
+    enum Screen: Hashable {
+        case breedsList
+        case dogsList(Breed)
+        case dog(DogViewModel)
+        
+        static func == (lhs: Screen, rhs: Screen) -> Bool {
+            switch (lhs, rhs) {
+            case (.breedsList, .breedsList):
+                return true
+            case let(.dogsList(lhsBreed), .dogsList(rhsBreed)):
+                return lhsBreed.name == rhsBreed.name
+            case (.dogsList, .breedsList):
+                return false
+            case (.breedsList, .dogsList):
+                return false
+            case (.dog, _):
+                return false
+            case (_, .dog):
+                return false
+            }
+        }
+        
+        func hash(into hasher: inout Hasher) { }
+    }
+    
     func screenFor(_ screen: Screen) -> AnyView {
         switch screen {
         case .breedsList:
@@ -48,7 +48,7 @@ class BreedsRouter: ObservableObject {
         case .dogsList(let breed):
             pushDogsListView(breed: breed)
         case .dog(let dog):
-            pushDogView(dog: dog)
+            pushDogDetailsView(dog: dog)
         }
     }
     
@@ -77,8 +77,8 @@ class BreedsRouter: ObservableObject {
         return DogsListView(store: store).toAnyView
     }
     
-    private func pushDogView(dog: DogViewModel) -> AnyView {
-        return DogView(dog: dog, isFavorite: false, onTapDog: { }, onTapFavorite: { }).toAnyView
+    private func pushDogDetailsView(dog: DogViewModel) -> AnyView {
+        return DogDetailsView(dog: dog).toAnyView
     }
 }
 
@@ -87,7 +87,7 @@ struct BreedsRouterView: View {
     var body: some View {
         NavigationStack(path: $router.navPath) {
             router.firstScreen
-                .navigationDestination(for: Screen.self) { screen in
+                .navigationDestination(for: BreedsRouter.Screen.self) { screen in
                     router.screenFor(screen)
                 }
         }

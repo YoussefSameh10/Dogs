@@ -7,12 +7,23 @@
 
 import Foundation
 import SwiftData
+import Combine
 
 @MainActor
 @Observable class FavoritesStore {
-    var state = FavoritesState()
-    private let environment = FavoritesEnvironment()
-    private let reducer = FavoritesReducer()
+    var state: FavoritesState
+    private let environment: FavoritesEnvironment
+    private let reducer: FavoritesReducer
+    
+    init(
+        state: FavoritesState = FavoritesState(),
+        reducer: FavoritesReducer = FavoritesReducer(),
+        environment: FavoritesEnvironment = FavoritesEnvironment()
+    ) {
+        self.state = state
+        self.reducer = reducer
+        self.environment = environment
+    }
     
     func send(_ action: FavoritesAction) {
         Task {
@@ -33,12 +44,14 @@ struct FavoritesState {
 enum FavoritesAction {
     case onAppear
     case loaded([DogViewModel])
+    case tapDog(DogViewModel)
     case tapFavorite(DogViewModel)
-//    case tapDog(DogViewModel)
 }
 
 struct FavoritesEnvironment {
     var container: ModelContainer? = nil
+    var goNext = PassthroughSubject<DogViewModel, Never>()
+    var subscriptions = Set<AnyCancellable>()
     
     init() {
         do {
@@ -76,6 +89,9 @@ struct FavoritesReducer {
         case .loaded(let dogs):
             newState.isLoading = false
             newState.favoriteDogs = dogs
+            return newState
+        case .tapDog(let dog):
+            environment.goNext.send(dog)
             return newState
         case .tapFavorite(let dog):
             if newState.favoriteDogs.contains(where: { $0.id == dog.id }) {

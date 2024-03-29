@@ -17,7 +17,7 @@ struct MainView: View {
                         Text("All")
                     }
                 }
-            FavoritesListView(store: FavoritesStore())
+            FavoritesRouterView(router: FavoritesRouter())
                 .tabItem {
                     VStack {
                         Image(systemName: "star.fill")
