@@ -16,17 +16,6 @@ class FavoritesRouter: ObservableObject {
         firstScreen = pushFavoritesListView()
     }
     
-    enum Screen: Hashable {
-        case favoritesList
-        case dog(DogViewModel)
-        
-        static func == (lhs: Screen, rhs: Screen) -> Bool {
-            false
-        }
-        
-        func hash(into hasher: inout Hasher) { }
-    }
-    
     func screenFor(_ screen: Screen) -> AnyView {
         switch screen {
         case .favoritesList:
@@ -52,7 +41,6 @@ class FavoritesRouter: ObservableObject {
         return DogDetailsView(dog: dog).toAnyView
     }
 }
-
 
 struct FavoritesRouterView: View {
     @ObservedObject var router: FavoritesRouter
