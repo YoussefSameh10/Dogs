@@ -32,5 +32,8 @@ struct FavoritesListView: View {
             }
         }
         .background(content: { Color.gray.opacity(0.2) })
+        .onAppear {
+            store.send(.onAppear)
+        }
     }
 }
