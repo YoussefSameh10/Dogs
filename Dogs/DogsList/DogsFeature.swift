@@ -70,11 +70,16 @@ struct DogsEnvironment {
         let (data, _) = try await URLSession.shared.data(from: URL(string: "https://dog.ceo/api/breed/\(breed.name)/images")!)
         let dogsURLs = try JSONDecoder().decode(DogResponse.self, from: data).images.map { URL(string: $0)! }
         
-        return try await withThrowingTaskGroup(of: Data.self) { group in
+        return try await withThrowingTaskGroup(of: DogViewModel?.self) { group in
             var dogs = [DogViewModel?]()
             for url in dogsURLs {
-                let data = try await URLSession.shared.data(from: url).0
-                dogs.append(data.toDog(id: url.absoluteString, breed: breed))
+                group.addTask {
+                    try await URLSession.shared.data(from: url).0.toDog(id: url.relativePath, breed: breed)
+                }
+            }
+            
+            for try await dog in group {
+                dogs.append(dog)
             }
             
             return dogs.compactMap { $0 }
