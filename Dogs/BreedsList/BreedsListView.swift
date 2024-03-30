@@ -38,7 +38,7 @@ struct BreedsListView: View {
                 }
                 .navigationTitle("Dogs")
                 .searchable(text: $store.state.searchText)
-                .onChange(of: store.state.searchText) { oldValue, newValue in
+                .onChange(of: store.state.searchText) { _, newValue in
                     store.send(.search(newValue))
                 }
             }

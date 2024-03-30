@@ -94,15 +94,9 @@ struct BreedsReducer {
         return result
     }
     
-    private func filter(_ breeds: [String: [Breed]], by searchText: String) ->[String: [Breed]] {
-        var breedsArray = [Breed]()
-        breeds.forEach { group in
-            group.value.forEach { breed in
-                breedsArray.append(breed)
-            }
-        }
-        
-        var filteredBreeds = breedsArray.filter { breed in
+    private func filter(_ breeds: [String: [Breed]], by searchText: String) -> [String: [Breed]] {
+        let breedsArray = breeds.flatMap { $0.value }
+        let filteredBreeds = breedsArray.filter { breed in
             breed.name.lowercased().hasPrefix(searchText.lowercased())
         }
         
