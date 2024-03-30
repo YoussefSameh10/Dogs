@@ -64,11 +64,11 @@ struct BreedsReducer {
         switch action {
         case .onAppear:
             let breeds = try await environment.fetchBreeds()
-            return try await reduce(state, .loaded(breeds), environment)
+            return try await reduce(newState, .loaded(breeds), environment)
         case .loaded(let breeds):
             newState.breeds = group(breeds)
             newState.isLoading = false
-            return newState
+            return try await reduce(newState, .search(newState.searchText), environment)
         case .open(let breed):
             environment.goNext.send(breed)
             return newState
