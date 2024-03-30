@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-@MainActor
-class FavoritesRouter: ObservableObject {
-    @Published var navPath = NavigationPath()
-    @Published var firstScreen: AnyView!
+@Observable @MainActor
+class FavoritesRouter {
+    var navPath = NavigationPath()
+    var firstScreen: AnyView!
     
     init() {
         firstScreen = pushFavoritesListView()
@@ -43,7 +43,7 @@ class FavoritesRouter: ObservableObject {
 }
 
 struct FavoritesRouterView: View {
-    @ObservedObject var router: FavoritesRouter
+    @State var router: FavoritesRouter
     var body: some View {
         NavigationStack(path: $router.navPath) {
             router.firstScreen

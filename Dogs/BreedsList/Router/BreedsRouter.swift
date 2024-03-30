@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-@MainActor
-class BreedsRouter: ObservableObject {
-    @Published var navPath = NavigationPath()
-    @Published var firstScreen: AnyView!
+@Observable @MainActor
+class BreedsRouter {
+    var navPath = NavigationPath()
+    var firstScreen: AnyView!
     
     init() {
         firstScreen = pushBreedsListView()
@@ -58,7 +58,7 @@ class BreedsRouter: ObservableObject {
 }
 
 struct BreedsRouterView: View {
-    @ObservedObject var router: BreedsRouter
+    @State var router: BreedsRouter
     var body: some View {
         NavigationStack(path: $router.navPath) {
             router.firstScreen
