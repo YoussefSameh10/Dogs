@@ -22,7 +22,7 @@ import Combine
     ) {
         self.state = state
         self.reducer = reducer
-        self.environment = environment
+        self.environment = environment        
     }
     
     func send(_ action: FavoritesAction) {

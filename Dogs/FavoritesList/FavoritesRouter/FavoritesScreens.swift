@@ -13,7 +13,13 @@ extension FavoritesRouter {
         case dog(DogViewModel)
         
         static func == (lhs: Screen, rhs: Screen) -> Bool {
-            false
+            switch (lhs, rhs) {
+            case (.favoritesList, .dog): false
+            case (.dog, .favoritesList): false
+            case (.favoritesList, .favoritesList): true
+            case (.dog(let lhsDog), .dog(let rhsDog)):
+                lhsDog == rhsDog
+            }
         }
         
         func hash(into hasher: inout Hasher) { }

@@ -43,9 +43,6 @@ struct BreedsListView: View {
                 }
             }
         }
-        .onAppear {
-            store.send(.onAppear)
-        }
     }
 }
 
