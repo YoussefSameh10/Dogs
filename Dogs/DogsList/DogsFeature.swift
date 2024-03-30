@@ -18,10 +18,13 @@ import Combine
     private let environment: DogsEnvironment
     
     init(breed: Breed, reducer: DogsReducer = DogsReducer(), environment: DogsEnvironment = DogsEnvironment()) {
-        self.environment = environment
-        self.state = DogsState(breed: breed)
         self.breed = breed
+        self.state = DogsState(breed: breed)
+        
         self.reducer = reducer
+        self.environment = environment
+        
+        send(.onAppear)
     }
     
     func send(_ action: DogsAction) {
