@@ -21,6 +21,8 @@
 		C6BAB1892BB17D9D00F158C6 /* BreedsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BAB1882BB17D9D00F158C6 /* BreedsFeature.swift */; };
 		C6EB33142BB71A6500EB74D0 /* DogDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EB33132BB71A6500EB74D0 /* DogDetailsView.swift */; };
 		C6EB33162BB71E8000EB74D0 /* FavoritesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EB33152BB71E8000EB74D0 /* FavoritesRouter.swift */; };
+		C6EB33192BB7275C00EB74D0 /* FavoritesScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EB33182BB7275C00EB74D0 /* FavoritesScreens.swift */; };
+		C6EB331C2BB7279900EB74D0 /* BreedsScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EB331B2BB7279900EB74D0 /* BreedsScreens.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,8 @@
 		C6BAB1882BB17D9D00F158C6 /* BreedsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedsFeature.swift; sourceTree = "<group>"; };
 		C6EB33132BB71A6500EB74D0 /* DogDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogDetailsView.swift; sourceTree = "<group>"; };
 		C6EB33152BB71E8000EB74D0 /* FavoritesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesRouter.swift; sourceTree = "<group>"; };
+		C6EB33182BB7275C00EB74D0 /* FavoritesScreens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesScreens.swift; sourceTree = "<group>"; };
+		C6EB331B2BB7279900EB74D0 /* BreedsScreens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedsScreens.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,14 +78,12 @@
 				C6BAB1692BB074BB00F158C6 /* DogsApp.swift */,
 				C6BAB16B2BB074BB00F158C6 /* MainView.swift */,
 				C6BAB17F2BB07C0800F158C6 /* NetworkResponses.swift */,
-				C6BAB1812BB0867E00F158C6 /* BreedsRouter.swift */,
 				C6BAB1772BB074CB00F158C6 /* BreedsList */,
 				C6BAB1832BB087E200F158C6 /* DogsList */,
 				C6BAB17C2BB0755D00F158C6 /* FavoritesList */,
 				C6EB33122BB71A1D00EB74D0 /* DogDetails */,
 				C6BAB16D2BB074BC00F158C6 /* Assets.xcassets */,
 				C6BAB16F2BB074BC00F158C6 /* Preview Content */,
-				C6EB33152BB71E8000EB74D0 /* FavoritesRouter.swift */,
 			);
 			path = Dogs;
 			sourceTree = "<group>";
@@ -99,6 +101,7 @@
 			children = (
 				C6BAB17A2BB0750B00F158C6 /* BreedsListView.swift */,
 				C6BAB1882BB17D9D00F158C6 /* BreedsFeature.swift */,
+				C6EB331A2BB7277D00EB74D0 /* Router */,
 			);
 			path = BreedsList;
 			sourceTree = "<group>";
@@ -108,6 +111,7 @@
 			children = (
 				C6BAB17D2BB0757000F158C6 /* FavoritesListView.swift */,
 				C679F10C2BB5E86800FB1380 /* FavoritesFeature.swift */,
+				C6EB33172BB7273D00EB74D0 /* FavoritesRouter */,
 			);
 			path = FavoritesList;
 			sourceTree = "<group>";
@@ -127,6 +131,24 @@
 				C6EB33132BB71A6500EB74D0 /* DogDetailsView.swift */,
 			);
 			path = DogDetails;
+			sourceTree = "<group>";
+		};
+		C6EB33172BB7273D00EB74D0 /* FavoritesRouter */ = {
+			isa = PBXGroup;
+			children = (
+				C6EB33152BB71E8000EB74D0 /* FavoritesRouter.swift */,
+				C6EB33182BB7275C00EB74D0 /* FavoritesScreens.swift */,
+			);
+			path = FavoritesRouter;
+			sourceTree = "<group>";
+		};
+		C6EB331A2BB7277D00EB74D0 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				C6BAB1812BB0867E00F158C6 /* BreedsRouter.swift */,
+				C6EB331B2BB7279900EB74D0 /* BreedsScreens.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,9 +224,11 @@
 				C6EB33162BB71E8000EB74D0 /* FavoritesRouter.swift in Sources */,
 				C6BAB17E2BB0757000F158C6 /* FavoritesListView.swift in Sources */,
 				C6BAB1892BB17D9D00F158C6 /* BreedsFeature.swift in Sources */,
+				C6EB33192BB7275C00EB74D0 /* FavoritesScreens.swift in Sources */,
 				C6BAB16C2BB074BB00F158C6 /* MainView.swift in Sources */,
 				C6BAB1802BB07C0800F158C6 /* NetworkResponses.swift in Sources */,
 				C6BAB1852BB0881900F158C6 /* DogsListView.swift in Sources */,
+				C6EB331C2BB7279900EB74D0 /* BreedsScreens.swift in Sources */,
 				C6BAB17B2BB0750B00F158C6 /* BreedsListView.swift in Sources */,
 				C679F10D2BB5E86800FB1380 /* FavoritesFeature.swift in Sources */,
 				C6BAB1872BB0A43800F158C6 /* DogsFeature.swift in Sources */,

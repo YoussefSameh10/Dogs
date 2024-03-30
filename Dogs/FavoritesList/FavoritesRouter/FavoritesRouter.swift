@@ -7,24 +7,13 @@
 
 import SwiftUI
 
-@MainActor
-class FavoritesRouter: ObservableObject {
-    @Published var navPath = NavigationPath()
-    @Published var firstScreen: AnyView!
+@Observable @MainActor
+class FavoritesRouter {
+    var navPath = NavigationPath()
+    var firstScreen: AnyView!
     
     init() {
         firstScreen = pushFavoritesListView()
-    }
-    
-    enum Screen: Hashable {
-        case favoritesList
-        case dog(DogViewModel)
-        
-        static func == (lhs: Screen, rhs: Screen) -> Bool {
-            false
-        }
-        
-        func hash(into hasher: inout Hasher) { }
     }
     
     func screenFor(_ screen: Screen) -> AnyView {
@@ -53,9 +42,8 @@ class FavoritesRouter: ObservableObject {
     }
 }
 
-
 struct FavoritesRouterView: View {
-    @ObservedObject var router: FavoritesRouter
+    @State var router: FavoritesRouter
     var body: some View {
         NavigationStack(path: $router.navPath) {
             router.firstScreen

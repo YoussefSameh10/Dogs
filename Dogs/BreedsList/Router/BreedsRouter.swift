@@ -7,38 +7,13 @@
 
 import SwiftUI
 
-@MainActor
-class BreedsRouter: ObservableObject {
-    @Published var navPath = NavigationPath()
-    @Published var firstScreen: AnyView!
+@Observable @MainActor
+class BreedsRouter {
+    var navPath = NavigationPath()
+    var firstScreen: AnyView!
     
     init() {
         firstScreen = pushBreedsListView()
-    }
-    
-    enum Screen: Hashable {
-        case breedsList
-        case dogsList(Breed)
-        case dog(DogViewModel)
-        
-        static func == (lhs: Screen, rhs: Screen) -> Bool {
-            switch (lhs, rhs) {
-            case (.breedsList, .breedsList):
-                return true
-            case let(.dogsList(lhsBreed), .dogsList(rhsBreed)):
-                return lhsBreed.name == rhsBreed.name
-            case (.dogsList, .breedsList):
-                return false
-            case (.breedsList, .dogsList):
-                return false
-            case (.dog, _):
-                return false
-            case (_, .dog):
-                return false
-            }
-        }
-        
-        func hash(into hasher: inout Hasher) { }
     }
     
     func screenFor(_ screen: Screen) -> AnyView {
@@ -83,7 +58,7 @@ class BreedsRouter: ObservableObject {
 }
 
 struct BreedsRouterView: View {
-    @ObservedObject var router: BreedsRouter
+    @State var router: BreedsRouter
     var body: some View {
         NavigationStack(path: $router.navPath) {
             router.firstScreen
