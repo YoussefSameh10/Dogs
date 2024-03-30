@@ -18,24 +18,21 @@ struct DogDetailsView: View {
     }
     
     var body: some View {
-        VStack() {
-            Text(dog.id)
-                .font(.title)
-            
-            Spacer()
-                .frame(height: 32)
-            
-            Image(uiImage: dog.image)
-                .resizable()
-                .scaledToFit()
-                .scaleEffect(scale)
-                .gesture(magnifyGesture)
-            
-            Spacer()
+        ScrollView {
+            VStack() {
+                Image(uiImage: dog.image)
+                    .resizable()
+                    .scaledToFit()
+                    .scaleEffect(scale)
+                    .gesture(magnifyGesture)
+                
+                Spacer()
+            }
         }
+        .navigationTitle(dog.breed.name.capitalized)
     }
 }
 
 #Preview {
-    DogDetailsView(dog: DogViewModel(id: "Huskey", image: UIImage(systemName: "dog")!))
+    DogDetailsView(dog: DogViewModel(id: "Huskey", breed: Breed(name: "Huskey"), image: UIImage(systemName: "dog")!))
 }

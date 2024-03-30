@@ -37,6 +37,7 @@ struct BreedsListView: View {
                     )
                     .tint(.black)
                 }
+                .navigationTitle("Dogs")
             }
         }
         .onAppear {

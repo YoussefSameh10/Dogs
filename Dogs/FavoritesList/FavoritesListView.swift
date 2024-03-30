@@ -28,6 +28,7 @@ struct FavoritesListView: View {
                         )
                     }
                 }
+                .navigationTitle("Favorites")
             }
         }
         .background(content: { Color.gray.opacity(0.2) })

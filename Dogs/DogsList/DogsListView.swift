@@ -8,12 +8,18 @@
 import SwiftUI
 
 struct DogViewModel: Identifiable, Equatable {
-    let image: UIImage
-    let id: String
+    static func == (lhs: DogViewModel, rhs: DogViewModel) -> Bool {
+        lhs.id == rhs.id
+    }
     
-    init(id: String, image: UIImage) {
-        self.image = image
+    let id: String
+    let breed: Breed
+    let image: UIImage
+    
+    init(id: String, breed: Breed, image: UIImage) {
         self.id = id
+        self.breed = breed
+        self.image = image
     }
 }
 
@@ -38,6 +44,7 @@ struct DogsListView: View {
                         )
                     }
                 }
+                .navigationTitle(store.state.breed.name.capitalized)
             }
         }
         .background(content: { Color.gray.opacity(0.2) })
