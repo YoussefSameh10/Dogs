@@ -7,32 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E72BD73D-7D2D-4AB3-83D4-92CC0BD78255"
+            uuid = "C2EE3322-E43A-4D37-BA42-6ABB42247FC2"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Dogs/DogsList/Favorites/FavoritesFeature.swift"
+            filePath = "Dogs/BreedsList/BreedsFeature.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "reduce(_:_:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C1BFDBAF-F083-41FB-A6C9-88C98BFA12B1"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Dogs/BreedsRouter.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
-            landmarkName = "pushDogsListView(breed:)"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "filter(_:by:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

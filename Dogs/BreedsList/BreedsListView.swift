@@ -19,28 +19,47 @@ struct BreedsListView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.top, 48)
             } else {
-                List(store.state.breeds, id: \.name) { breed in
-                    Button(
-                        action: {
-                            store.send(.open(breed))
-                        },
-                        label: {
-                            HStack {
-                                Text(breed.name.capitalized)
-                                    .fontWeight(.medium)
-                                    .font(.title3)
-                                Spacer()
-                                Image(systemName: "chevron.right.circle.fill")
-                                    .foregroundColor(.cyan)
+                List {
+                    ForEach(store.state.filteredBreeds.keys.sorted(), id: \.self) { key in
+                        Section(header: Text(key.capitalized)) {
+                            ForEach(store.state.filteredBreeds[key]!, id: \.name) { breed in
+                                Button(
+                                    action: {
+                                        store.send(.open(breed))
+                                    },
+                                    label: {
+                                        BreedRow(breed: breed)
+                                    }
+                                )
+                                .tint(.black)
                             }
                         }
-                    )
-                    .tint(.black)
+                    }
+                }
+                .navigationTitle("Dogs")
+                .searchable(text: $store.state.searchText)
+                .onChange(of: store.state.searchText) { _, newValue in
+                    store.send(.search(newValue))
                 }
             }
         }
         .onAppear {
             store.send(.onAppear)
+        }
+    }
+}
+
+private struct BreedRow: View {
+    var breed: Breed
+    
+    var body: some View {
+        HStack {
+            Text(breed.name.capitalized)
+                .fontWeight(.medium)
+                .font(.title3)
+            Spacer()
+            Image(systemName: "chevron.right.circle.fill")
+                .foregroundColor(.cyan)
         }
     }
 }

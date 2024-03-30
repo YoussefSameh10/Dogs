@@ -74,7 +74,7 @@ struct DogsEnvironment {
             var dogs = [DogViewModel?]()
             for url in dogsURLs {
                 let data = try await URLSession.shared.data(from: url).0
-                dogs.append(data.toDog(id: url.absoluteString))
+                dogs.append(data.toDog(id: url.absoluteString, breed: breed))
             }
             
             return dogs.compactMap { $0 }
@@ -83,7 +83,7 @@ struct DogsEnvironment {
     
     func addToFavorites(dog: DogViewModel) async {
         guard let data = dog.image.pngData() else { return }
-        await container?.mainContext.insert(Dog(id: dog.id,data: data))
+        await container?.mainContext.insert(Dog(id: dog.id, breed: dog.breed, data: data))
     }
     
     func removeFromFavorites(dog: DogViewModel) async {
@@ -94,7 +94,7 @@ struct DogsEnvironment {
     
     func getFavoriteDogs() async -> [DogViewModel] {
         let dogs = try? await container?.mainContext.fetch(FetchDescriptor<Dog>())
-        return dogs?.compactMap { $0.data.toDog(id: $0.id) } ?? []
+        return dogs?.compactMap { $0.data.toDog(id: $0.id, breed: $0.breed) } ?? []
     }
 }
 
@@ -130,8 +130,8 @@ struct DogsReducer {
 }
 
 extension Data {
-    func toDog(id: String) -> DogViewModel? {
+    func toDog(id: String, breed: Breed) -> DogViewModel? {
         guard let image = UIImage(data: self) else { return nil }
-        return DogViewModel(id: id, image: image)
+        return DogViewModel(id: id, breed: breed, image: image)
     }
 }
