@@ -24,9 +24,9 @@ extension BreedsRouter {
             case (.breedsList, .dogsList):
                 return false
             case (.dog, _):
-                return false
+                return true
             case (_, .dog):
-                return false
+                return true
             }
         }
         

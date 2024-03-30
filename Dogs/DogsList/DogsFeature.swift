@@ -38,7 +38,7 @@ import Combine
     }
     
     func isFavorite(dog: DogViewModel) -> Bool {
-        return state.favoriteDogs.contains(where: { $0.id == dog.id })
+        return state.favoriteDogs.contains(where: { $0 == dog })
     }
 }
 
