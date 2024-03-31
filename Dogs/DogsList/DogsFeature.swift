@@ -57,52 +57,29 @@ enum DogsAction {
 }
 
 struct DogsEnvironment {
-    var container: ModelContainer? = nil
+    let repo: DogsRepo
     
     var goNext = PassthroughSubject<DogViewModel,Never>()
     var subscriptions = Set<AnyCancellable>()
     
-    init() {
-        do {
-            container = try ModelContainer(for: Dog.self)
-        } catch {
-            print(error.localizedDescription)
-        }
+    init(repo: DogsRepo = DogsRepoReal()) {
+        self.repo = repo
     }
+    
     func fetchDogs(breed: Breed) async throws -> [DogViewModel] {
-        let (data, _) = try await URLSession.shared.data(from: URL(string: "https://dog.ceo/api/breed/\(breed.name)/images")!)
-        let dogsURLs = try JSONDecoder().decode(DogResponse.self, from: data).images.map { URL(string: $0)! }
-        
-        return try await withThrowingTaskGroup(of: DogViewModel?.self) { group in
-            var dogs = [DogViewModel?]()
-            for url in dogsURLs {
-                group.addTask {
-                    try await URLSession.shared.data(from: url).0.toDog(id: url.relativePath, breed: breed)
-                }
-            }
-            
-            for try await dog in group {
-                dogs.append(dog)
-            }
-            
-            return dogs.compactMap { $0 }
-        }
+        try await repo.fetchDogs(breed: breed)
     }
     
     func addToFavorites(dog: DogViewModel) async {
-        guard let data = dog.image.pngData() else { return }
-        await container?.mainContext.insert(Dog(id: dog.id, breed: dog.breed, data: data))
+        await repo.addToFavorites(dog: dog)
     }
     
     func removeFromFavorites(dog: DogViewModel) async {
-        guard let data = dog.image.pngData() else { return }
-        guard let dogToDelete = try? await container?.mainContext.fetch(FetchDescriptor<Dog>()).first(where: { $0.id == dog.id }) else { return }
-        await container?.mainContext.delete(dogToDelete)
+        await repo.removeFromFavorites(dog: dog)
     }
     
     func getFavoriteDogs() async -> [DogViewModel] {
-        let dogs = try? await container?.mainContext.fetch(FetchDescriptor<Dog>())
-        return dogs?.compactMap { $0.data.toDog(id: $0.id, breed: $0.breed) } ?? []
+        await repo.getFavoriteDogs()
     }
 }
 
