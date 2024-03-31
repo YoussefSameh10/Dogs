@@ -62,7 +62,7 @@ struct DogsEnvironment {
     var goNext = PassthroughSubject<DogViewModel,Never>()
     var subscriptions = Set<AnyCancellable>()
     
-    init(repo: DogsRepo = DogsRepo()) {
+    init(repo: DogsRepo = DogsRepoReal()) {
         self.repo = repo
     }
     

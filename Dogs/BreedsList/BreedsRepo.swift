@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct BreedsRepo {
+protocol BreedsRepo {
+    func fetchBreeds()  async throws -> [Breed]
+}
+
+struct BreedsRepoReal: BreedsRepo {
     func fetchBreeds()  async throws -> [Breed] {
         let (data, _) = try await URLSession.shared.data(from: URL(string: "https://dog.ceo/api/breeds/list/all")!)
         return try JSONDecoder().decode(BreedsResponse.self, from: data).breeds.sorted(by: { $0.name < $1.name })

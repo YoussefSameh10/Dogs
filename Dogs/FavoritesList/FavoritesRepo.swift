@@ -8,8 +8,14 @@
 import Foundation
 import SwiftData
 
-struct FavoritesRepo {
-    var container: ModelContainer? = nil
+protocol FavoritesRepo {
+    func addToFavorites(dog: DogViewModel) async
+    func removeFromFavorites(dog: DogViewModel) async
+    func getFavoriteDogs() async -> [DogViewModel]
+}
+
+struct FavoritesRepoReal: FavoritesRepo {
+    private var container: ModelContainer? = nil
     
     init() {
         do {

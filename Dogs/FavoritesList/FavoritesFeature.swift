@@ -53,7 +53,7 @@ struct FavoritesEnvironment {
     var goNext = PassthroughSubject<DogViewModel, Never>()
     var subscriptions = Set<AnyCancellable>()
     
-    init(repo: FavoritesRepo = FavoritesRepo()) {
+    init(repo: FavoritesRepo = FavoritesRepoReal()) {
         self.repo = repo
     }
     

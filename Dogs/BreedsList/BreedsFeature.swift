@@ -57,7 +57,7 @@ struct BreedsEnvironment {
     var goNext = PassthroughSubject<Breed, Never>()
     var subscriptions = Set<AnyCancellable>()
     
-    init(repo: BreedsRepo = BreedsRepo()) {
+    init(repo: BreedsRepo = BreedsRepoReal()) {
         self.repo = repo
     }
     

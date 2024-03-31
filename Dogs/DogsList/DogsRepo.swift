@@ -8,8 +8,15 @@
 import Foundation
 import SwiftData
 
-struct DogsRepo {
-    var container: ModelContainer? = nil
+protocol DogsRepo {
+    func fetchDogs(breed: Breed) async throws -> [DogViewModel]
+    func addToFavorites(dog: DogViewModel) async
+    func removeFromFavorites(dog: DogViewModel) async
+    func getFavoriteDogs() async -> [DogViewModel]
+}
+
+struct DogsRepoReal: DogsRepo {
+    private var container: ModelContainer? = nil
     
     init() {
         do {
