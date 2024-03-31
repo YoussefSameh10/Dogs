@@ -49,32 +49,24 @@ enum FavoritesAction {
 }
 
 struct FavoritesEnvironment {
-    var container: ModelContainer? = nil
+    let repo: FavoritesRepo
     var goNext = PassthroughSubject<DogViewModel, Never>()
     var subscriptions = Set<AnyCancellable>()
     
-    init() {
-        do {
-            container = try ModelContainer(for: Dog.self)
-        } catch {
-            print(error.localizedDescription)
-        }
+    init(repo: FavoritesRepo = FavoritesRepo()) {
+        self.repo = repo
     }
     
     func addToFavorites(dog: DogViewModel) async {
-        guard let data = dog.image.pngData() else { return }
-        await container?.mainContext.insert(Dog(id: dog.id, breed: dog.breed, data: data))
+        await repo.addToFavorites(dog: dog)
     }
     
     func removeFromFavorites(dog: DogViewModel) async {
-        guard let data = dog.image.pngData() else { return }
-        guard let dogToDelete = try? await container?.mainContext.fetch(FetchDescriptor<Dog>()).first(where: { $0.id == dog.id }) else { return }
-        await container?.mainContext.delete(dogToDelete)
+        await repo.removeFromFavorites(dog: dog)
     }
     
     func getFavoriteDogs() async -> [DogViewModel] {
-        let dogs = try? await container?.mainContext.fetch(FetchDescriptor<Dog>())
-        return dogs?.compactMap { $0.data.toDog(id: $0.id, breed: $0.breed) } ?? []
+        await repo.getFavoriteDogs()
     }
 }
 
