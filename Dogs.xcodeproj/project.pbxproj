@@ -203,10 +203,10 @@
 		C6BAB1772BB074CB00F158C6 /* BreedsList */ = {
 			isa = PBXGroup;
 			children = (
+				C6B551182BBB37EF0059C53C /* Presentation */,
 				C6B551192BBB37FA0059C53C /* Domain */,
 				C6B5511A2BBB38100059C53C /* Data */,
 				C6B551222BBB3E0C0059C53C /* Service */,
-				C6B551182BBB37EF0059C53C /* Presentation */,
 				C6EB331A2BB7277D00EB74D0 /* Router */,
 			);
 			path = BreedsList;
