@@ -15,29 +15,21 @@ protocol FavoritesRepo {
 }
 
 struct FavoritesRepoReal: FavoritesRepo {
-    private var container: ModelContainer? = nil
+    private let database: DatabaseService
     
-    init() {
-        do {
-            container = try ModelContainer(for: Dog.self)
-        } catch {
-            print(error.localizedDescription)
-        }
+    init(database: DatabaseService) {
+        self.database = database
     }
     
     func addToFavorites(dog: DogViewModel) async {
-        guard let data = dog.image.pngData() else { return }
-        await container?.mainContext.insert(Dog(id: dog.id, breed: dog.breed, data: data))
+        await database.addToFavorites(dog: dog)
     }
     
     func removeFromFavorites(dog: DogViewModel) async {
-        guard let data = dog.image.pngData() else { return }
-        guard let dogToDelete = try? await container?.mainContext.fetch(FetchDescriptor<Dog>()).first(where: { $0.id == dog.id }) else { return }
-        await container?.mainContext.delete(dogToDelete)
+        await database.removeFromFavorites(dog: dog)
     }
     
     func getFavoriteDogs() async -> [DogViewModel] {
-        let dogs = try? await container?.mainContext.fetch(FetchDescriptor<Dog>())
-        return dogs?.compactMap { $0.data.toDog(id: $0.id, breed: $0.breed) } ?? []
+        await database.getFavoriteDogs()
     }
 }
