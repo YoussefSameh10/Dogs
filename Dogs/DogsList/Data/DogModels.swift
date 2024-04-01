@@ -1,5 +1,5 @@
 //
-//  DogsModel.swift
+//  DogModels.swift
 //  Dogs
 //
 //  Created by Youssef Ghattas on 01/04/2024.
@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 import UIKit
 
-struct DogResponse: Codable {
+struct DogsResponse: Codable {
     var images: [String]
     var status: String
     
@@ -20,7 +20,7 @@ struct DogResponse: Codable {
 }
 
 @Model
-class Dog: Identifiable, Equatable {
+class DogEntity: Identifiable, Equatable {
     let id: String
     let data: Data
     let breed: Breed
@@ -31,11 +31,7 @@ class Dog: Identifiable, Equatable {
     }
 }
 
-struct DogViewModel: Identifiable, Equatable {
-    static func == (lhs: DogViewModel, rhs: DogViewModel) -> Bool {
-        lhs.id == rhs.id
-    }
-    
+struct DogModel: Identifiable, Equatable {
     let id: String
     let breed: Breed
     let image: UIImage
@@ -44,5 +40,9 @@ struct DogViewModel: Identifiable, Equatable {
         self.id = id
         self.breed = breed
         self.image = image
+    }
+    
+    static func == (lhs: DogModel, rhs: DogModel) -> Bool {
+        lhs.id == rhs.id
     }
 }

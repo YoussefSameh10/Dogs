@@ -37,48 +37,48 @@ import Combine
         }
     }
     
-    func isFavorite(dog: DogViewModel) -> Bool {
+    func isFavorite(dog: DogModel) -> Bool {
         return state.favoriteDogs.contains(where: { $0 == dog })
     }
 }
 
 struct DogsState {
     let breed: Breed
-    var dogs = [DogViewModel]()
-    var favoriteDogs = [DogViewModel]()
+    var dogs = [DogModel]()
+    var favoriteDogs = [DogModel]()
     var isLoading = true
 }
 
 enum DogsAction {
     case onAppear
-    case loaded(dogs: [DogViewModel], favoriteDogs: [DogViewModel])
-    case tapDog(DogViewModel)
-    case tapFavorites(DogViewModel)
+    case loaded(dogs: [DogModel], favoriteDogs: [DogModel])
+    case tapDog(DogModel)
+    case tapFavorites(DogModel)
 }
 
 struct DogsEnvironment {
     let repo: DogsRepo
     
-    var goNext = PassthroughSubject<DogViewModel,Never>()
+    var goNext = PassthroughSubject<DogModel,Never>()
     var subscriptions = Set<AnyCancellable>()
     
     init(repo: DogsRepo = DogsRepoImpl()) {
         self.repo = repo
     }
     
-    func fetchDogs(breed: Breed) async throws -> [DogViewModel] {
+    func fetchDogs(breed: Breed) async throws -> [DogModel] {
         try await repo.fetchDogs(breed: breed)
     }
     
-    func addToFavorites(dog: DogViewModel) async {
+    func addToFavorites(dog: DogModel) async {
         await repo.addToFavorites(dog: dog)
     }
     
-    func removeFromFavorites(dog: DogViewModel) async {
+    func removeFromFavorites(dog: DogModel) async {
         await repo.removeFromFavorites(dog: dog)
     }
     
-    func getFavoriteDogs() async -> [DogViewModel] {
+    func getFavoriteDogs() async -> [DogModel] {
         await repo.getFavoriteDogs()
     }
 }
@@ -101,8 +101,8 @@ struct DogsReducer {
             environment.goNext.send(dog)
             return newState
         case .tapFavorites(let dog):
-            if newState.favoriteDogs.contains(where: { $0.id == dog.id }) {
-                newState.favoriteDogs.removeAll(where: { $0.id == dog.id })
+            if newState.favoriteDogs.contains(where: { $0 == dog }) {
+                newState.favoriteDogs.removeAll(where: { $0 == dog })
                 await environment.removeFromFavorites(dog: dog)
                 
                 return newState
@@ -115,8 +115,8 @@ struct DogsReducer {
 }
 
 extension Data {
-    func toDog(id: String, breed: Breed) -> DogViewModel? {
+    func toDog(id: String, breed: Breed) -> DogModel? {
         guard let image = UIImage(data: self) else { return nil }
-        return DogViewModel(id: id, breed: breed, image: image)
+        return DogModel(id: id, breed: breed, image: image)
     }
 }
