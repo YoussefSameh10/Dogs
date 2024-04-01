@@ -1,5 +1,5 @@
 //
-//  DatabaseService.swift
+//  DogsDatabaseService.swift
 //  Dogs
 //
 //  Created by Youssef Ghattas on 01/04/2024.
@@ -8,13 +8,13 @@
 import Foundation
 import SwiftData
 
-protocol DatabaseService {
+protocol DogsDatabaseService {
     func addToFavorites(dog: DogViewModel) async
     func removeFromFavorites(dog: DogViewModel) async
     func getFavoriteDogs() async -> [DogViewModel]
 }
 
-struct DatabaseServiceImpl: DatabaseService {
+struct DogsDatabaseServiceImpl: DogsDatabaseService {
     private var container: ModelContainer? = nil
     
     init() {

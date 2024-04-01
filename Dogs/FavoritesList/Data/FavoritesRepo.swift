@@ -1,5 +1,5 @@
 //
-//  DogsRepo.swift
+//  FavoritesRepo.swift
 //  Dogs
 //
 //  Created by Youssef Ghattas on 31/03/2024.
@@ -8,27 +8,17 @@
 import Foundation
 import SwiftData
 
-protocol DogsRepo {
-    func fetchDogs(breed: Breed) async throws -> [DogViewModel]
+protocol FavoritesRepo {
     func addToFavorites(dog: DogViewModel) async
     func removeFromFavorites(dog: DogViewModel) async
     func getFavoriteDogs() async -> [DogViewModel]
 }
 
-struct DogsRepoImpl: DogsRepo {
-    private let network: DogsNetworkService
-    private let database: DatabaseService
+struct FavoritesRepoImpl: FavoritesRepo {
+    private let database: DogsDatabaseService
     
-    init(
-        network: DogsNetworkService = DogsNetworkServiceImpl(),
-        database: DatabaseService = DatabaseServiceImpl()
-    ) {
-        self.network = network
+    init(database: DogsDatabaseService = DogsDatabaseServiceImpl()) {
         self.database = database
-    }
-    
-    func fetchDogs(breed: Breed) async throws -> [DogViewModel] {
-        try await network.fetchDogs(breed: breed)
     }
     
     func addToFavorites(dog: DogViewModel) async {
