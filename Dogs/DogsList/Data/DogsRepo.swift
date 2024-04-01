@@ -17,11 +17,11 @@ protocol DogsRepo {
 
 struct DogsRepoImpl: DogsRepo {
     private let network: DogsNetworkService
-    private let database: DogsDatabaseService
+    private let database: DogsDatabaseService?
     
     init(
         network: DogsNetworkService = DogsNetworkServiceImpl(),
-        database: DogsDatabaseService = DogsDatabaseServiceImpl()
+        database: DogsDatabaseService? = DogsDatabaseServiceImpl()
     ) {
         self.network = network
         self.database = database
@@ -32,14 +32,14 @@ struct DogsRepoImpl: DogsRepo {
     }
     
     func addToFavorites(dog: DogModel) async {
-        await database.addToFavorites(dog: dog)
+        await database?.addToFavorites(dog: dog)
     }
     
     func removeFromFavorites(dog: DogModel) async {
-        await database.removeFromFavorites(dog: dog)
+        await database?.removeFromFavorites(dog: dog)
     }
     
     func getFavoriteDogs() async -> [DogModel] {
-        await database.getFavoriteDogs()
+        await database?.getFavoriteDogs() ?? []
     }
 }

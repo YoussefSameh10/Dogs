@@ -14,30 +14,35 @@ protocol DogsDatabaseService {
     func getFavoriteDogs() async -> [DogModel]
 }
 
-struct DogsDatabaseServiceImpl: DogsDatabaseService {
-    private var container: ModelContainer? = nil
-    
-    init() {
-        do {
-            container = try ModelContainer(for: DogEntity.self)
-        } catch {
-            print(error.localizedDescription)
-        }
+@ModelActor
+actor DogsDatabaseServiceImpl: DogsDatabaseService {
+    init?() {
+        guard let container = try? ModelContainer(for: DogEntity.self) else { return nil }
+        let modelContext = ModelContext(container)
+        modelExecutor = DefaultSerialModelExecutor(modelContext: modelContext)
+        modelContainer = container
     }
-    
     func addToFavorites(dog: DogModel) async {
         guard let data = dog.image.pngData() else { return }
-        await container?.mainContext.insert(DogEntity(id: dog.id, breed: dog.breed, data: data))
+        modelContext.insert(DogEntity(id: dog.id, breed: dog.breed, data: data))
     }
     
     func removeFromFavorites(dog: DogModel) async {
-        guard let data = dog.image.pngData() else { return }
-        guard let dogToDelete = try? await container?.mainContext.fetch(FetchDescriptor<DogEntity>()).first(where: { $0.id == dog.id}) else { return }
-        await container?.mainContext.delete(dogToDelete)
+        guard let dogToDelete = try? modelContext
+            .fetch(FetchDescriptor<DogEntity>())
+            .first(where: { $0.id == dog.id})
+        else { return }
+        modelContext.delete(dogToDelete)
     }
     
     func getFavoriteDogs() async -> [DogModel] {
-        let dogs = try? await container?.mainContext.fetch(FetchDescriptor<DogEntity>())
+        let dogs = try? modelContext.fetch(FetchDescriptor<DogEntity>())
         return dogs?.compactMap { $0.data.toDog(id: $0.id, breed: $0.breed) } ?? []
+    }
+}
+
+extension DispatchQueue {
+    static var currentLabel: String {
+        return String(validatingUTF8: __dispatch_queue_get_label(nil)) ?? "unknown"
     }
 }
