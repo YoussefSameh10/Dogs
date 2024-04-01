@@ -9,9 +9,9 @@ import Foundation
 import SwiftData
 
 protocol FavoritesRepo {
-    func addToFavorites(dog: DogViewModel) async
-    func removeFromFavorites(dog: DogViewModel) async
-    func getFavoriteDogs() async -> [DogViewModel]
+    func addToFavorites(dog: DogModel) async
+    func removeFromFavorites(dog: DogModel) async
+    func getFavoriteDogs() async -> [DogModel]
 }
 
 struct FavoritesRepoImpl: FavoritesRepo {
@@ -21,15 +21,15 @@ struct FavoritesRepoImpl: FavoritesRepo {
         self.database = database
     }
     
-    func addToFavorites(dog: DogViewModel) async {
+    func addToFavorites(dog: DogModel) async {
         await database.addToFavorites(dog: dog)
     }
     
-    func removeFromFavorites(dog: DogViewModel) async {
+    func removeFromFavorites(dog: DogModel) async {
         await database.removeFromFavorites(dog: dog)
     }
     
-    func getFavoriteDogs() async -> [DogViewModel] {
+    func getFavoriteDogs() async -> [DogModel] {
         await database.getFavoriteDogs()
     }
 }

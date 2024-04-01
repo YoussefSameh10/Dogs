@@ -10,8 +10,8 @@ import Foundation
 extension BreedsRouter {
     enum Screen: Hashable {
         case breedsList
-        case dogsList(Breed)
-        case dog(DogViewModel)
+        case dogsList(BreedModel)
+        case dog(DogModel)
         
         static func == (lhs: Screen, rhs: Screen) -> Bool {
             switch (lhs, rhs) {

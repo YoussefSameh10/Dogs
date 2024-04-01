@@ -23,7 +23,9 @@ struct DogsListView: View {
                         DogView(
                             dog: dog,
                             isFavorite: store.isFavorite(dog: dog),
-                            onTapDog: { store.send(.tapDog(dog)) },
+                            onTapDog: {
+                                store.send(.tapDog(dog))
+                            },
                             onTapFavorite: { store.send(.tapFavorites(dog)) }
                         )
                     }
@@ -36,7 +38,7 @@ struct DogsListView: View {
 }
 
 struct DogView: View {
-    var dog: DogViewModel
+    var dog: DogModel
     var isFavorite: Bool
     var onTapDog: () -> ()
     var onTapFavorite: () -> ()
@@ -72,5 +74,5 @@ struct DogView: View {
 }
 
 #Preview {
-    DogsListView(store: DogsStore(breed: Breed(name: "Buhund")))
+    DogsListView(store: DogsStore(breed: BreedModel(name: "Buhund")))
 }

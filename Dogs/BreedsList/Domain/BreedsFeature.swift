@@ -34,34 +34,34 @@ import Combine
 }
 
 struct BreedsState {
-    var breeds = [String: [Breed]]() {
+    var breeds = [String: [BreedModel]]() {
         didSet {
             filteredBreeds = breeds
         }
     }
-    var filteredBreeds = [String: [Breed]]()
+    var filteredBreeds = [String: [BreedModel]]()
     var isLoading = true
     var searchText = ""
 }
 
 enum BreedsAction {
     case onAppear
-    case loaded([Breed])
-    case open(Breed)
+    case loaded([BreedModel])
+    case open(BreedModel)
     case search(String)
 }
 
 struct BreedsEnvironment {
     let repo: BreedsRepo
     
-    var goNext = PassthroughSubject<Breed, Never>()
+    var goNext = PassthroughSubject<BreedModel, Never>()
     var subscriptions = Set<AnyCancellable>()
     
     init(repo: BreedsRepo = BreedsRepoImpl()) {
         self.repo = repo
     }
     
-    func fetchBreeds() async throws -> [Breed] {
+    func fetchBreeds() async throws -> [BreedModel] {
         try await repo.fetchBreeds()
     }
 }
@@ -86,8 +86,8 @@ struct BreedsReducer {
         }
     }
     
-    private func group(_ breeds: [Breed]) -> [String: [Breed]] {
-        var result = [String: [Breed]]()
+    private func group(_ breeds: [BreedModel]) -> [String: [BreedModel]] {
+        var result = [String: [BreedModel]]()
         
         for breed in breeds {
             let firstLetter = String(breed.name.prefix(1)).uppercased()
@@ -102,7 +102,7 @@ struct BreedsReducer {
         return result
     }
     
-    private func filter(_ breeds: [String: [Breed]], by searchText: String) -> [String: [Breed]] {
+    private func filter(_ breeds: [String: [BreedModel]], by searchText: String) -> [String: [BreedModel]] {
         let breedsArray = breeds.flatMap { $0.value }
         let filteredBreeds = breedsArray.filter { breed in
             breed.name.lowercased().hasPrefix(searchText.lowercased())

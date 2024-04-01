@@ -8,7 +8,7 @@
 import Foundation
 
 protocol BreedsRepo {
-    func fetchBreeds()  async throws -> [Breed]
+    func fetchBreeds()  async throws -> [BreedModel]
 }
 
 struct BreedsRepoImpl: BreedsRepo {
@@ -18,7 +18,7 @@ struct BreedsRepoImpl: BreedsRepo {
         self.network = network
     }
     
-    func fetchBreeds()  async throws -> [Breed] {
+    func fetchBreeds()  async throws -> [BreedModel] {
         try await network.fetchBreeds()
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 extension FavoritesRouter {
     enum Screen: Hashable {
         case favoritesList
-        case dog(DogViewModel)
+        case dog(DogModel)
         
         static func == (lhs: Screen, rhs: Screen) -> Bool {
             switch (lhs, rhs) {

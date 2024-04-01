@@ -37,7 +37,7 @@ class FavoritesRouter {
         return FavoritesListView(store: store).toAnyView
     }
     
-    private func pushDogDetailsView(dog: DogViewModel) -> AnyView {
+    private func pushDogDetailsView(dog: DogModel) -> AnyView {
         return DogDetailsView(dog: dog).toAnyView
     }
 }

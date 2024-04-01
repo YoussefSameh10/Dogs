@@ -31,41 +31,41 @@ import Combine
         }
     }
     
-    func isFavorite(dog: DogViewModel) -> Bool {
-        return state.favoriteDogs.contains(where: { $0.id == dog.id })
+    func isFavorite(dog: DogModel) -> Bool {
+        return state.favoriteDogs.contains(where: { $0 == dog })
     }
 }
 
 struct FavoritesState {
-    var favoriteDogs = [DogViewModel]()
+    var favoriteDogs = [DogModel]()
     var isLoading = true
 }
 
 enum FavoritesAction {
     case onAppear
-    case loaded([DogViewModel])
-    case tapDog(DogViewModel)
-    case tapFavorite(DogViewModel)
+    case loaded([DogModel])
+    case tapDog(DogModel)
+    case tapFavorite(DogModel)
 }
 
 struct FavoritesEnvironment {
     let repo: FavoritesRepo
-    var goNext = PassthroughSubject<DogViewModel, Never>()
+    var goNext = PassthroughSubject<DogModel, Never>()
     var subscriptions = Set<AnyCancellable>()
     
     init(repo: FavoritesRepo = FavoritesRepoImpl()) {
         self.repo = repo
     }
     
-    func addToFavorites(dog: DogViewModel) async {
+    func addToFavorites(dog: DogModel) async {
         await repo.addToFavorites(dog: dog)
     }
     
-    func removeFromFavorites(dog: DogViewModel) async {
+    func removeFromFavorites(dog: DogModel) async {
         await repo.removeFromFavorites(dog: dog)
     }
     
-    func getFavoriteDogs() async -> [DogViewModel] {
+    func getFavoriteDogs() async -> [DogModel] {
         await repo.getFavoriteDogs()
     }
 }
@@ -86,8 +86,8 @@ struct FavoritesReducer {
             environment.goNext.send(dog)
             return newState
         case .tapFavorite(let dog):
-            if newState.favoriteDogs.contains(where: { $0.id == dog.id }) {
-                newState.favoriteDogs.removeAll(where: { $0.id == dog.id })
+            if newState.favoriteDogs.contains(where: { $0 == dog }) {
+                newState.favoriteDogs.removeAll(where: { $0 == dog })
                 await environment.removeFromFavorites(dog: dog)
                 return newState
             }
