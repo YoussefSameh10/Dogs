@@ -11,7 +11,7 @@ protocol BreedsRepo {
     func fetchBreeds()  async throws -> [Breed]
 }
 
-struct BreedsRepoReal: BreedsRepo {
+struct BreedsRepoImpl: BreedsRepo {
     private let network: BreedsNetworkService
     
     init(network: BreedsNetworkService = BreedsNetworkServiceImpl()) {

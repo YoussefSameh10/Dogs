@@ -14,7 +14,7 @@ protocol FavoritesRepo {
     func getFavoriteDogs() async -> [DogViewModel]
 }
 
-struct FavoritesRepoReal: FavoritesRepo {
+struct FavoritesRepoImpl: FavoritesRepo {
     private let database: DatabaseService
     
     init(database: DatabaseService = DatabaseServiceImpl()) {

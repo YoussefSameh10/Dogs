@@ -15,7 +15,7 @@ protocol DogsRepo {
     func getFavoriteDogs() async -> [DogViewModel]
 }
 
-struct DogsRepoReal: DogsRepo {
+struct DogsRepoImpl: DogsRepo {
     private let network: DogsNetworkService
     private let database: DatabaseService
     
