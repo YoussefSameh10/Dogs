@@ -15,21 +15,21 @@ protocol FavoritesRepo {
 }
 
 struct FavoritesRepoImpl: FavoritesRepo {
-    private let database: DogsDatabaseService
+    private let database: DogsDatabaseService?
     
-    init(database: DogsDatabaseService = DogsDatabaseServiceImpl()) {
+    init(database: DogsDatabaseService? = DogsDatabaseServiceImpl()) {
         self.database = database
     }
     
     func addToFavorites(dog: DogModel) async {
-        await database.addToFavorites(dog: dog)
+        await database?.addToFavorites(dog: dog)
     }
     
     func removeFromFavorites(dog: DogModel) async {
-        await database.removeFromFavorites(dog: dog)
+        await database?.removeFromFavorites(dog: dog)
     }
     
     func getFavoriteDogs() async -> [DogModel] {
-        await database.getFavoriteDogs()
+        await database?.getFavoriteDogs() ?? []
     }
 }
