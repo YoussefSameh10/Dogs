@@ -17,7 +17,7 @@ protocol FavoritesRepo {
 struct FavoritesRepoReal: FavoritesRepo {
     private let database: DatabaseService
     
-    init(database: DatabaseService) {
+    init(database: DatabaseService = DatabaseServiceImpl()) {
         self.database = database
     }
     

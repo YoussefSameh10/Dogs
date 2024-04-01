@@ -14,7 +14,7 @@ protocol DatabaseService {
     func getFavoriteDogs() async -> [DogViewModel]
 }
 
-struct DatabaseServiceImpl {
+struct DatabaseServiceImpl: DatabaseService {
     private var container: ModelContainer? = nil
     
     init() {
