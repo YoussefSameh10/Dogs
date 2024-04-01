@@ -8,11 +8,11 @@
 import Foundation
 
 protocol DogsNetworkService {
-    func fetchDogs(breed: Breed) async throws -> [DogModel]
+    func fetchDogs(breed: BreedModel) async throws -> [DogModel]
 }
 
 struct DogsNetworkServiceImpl: DogsNetworkService {
-    func fetchDogs(breed: Breed) async throws -> [DogModel] {
+    func fetchDogs(breed: BreedModel) async throws -> [DogModel] {
         let (data, _) = try await URLSession.shared.data(from: URL(string: "https://dog.ceo/api/breed/\(breed.name)/images")!)
         let dogsURLs = try JSONDecoder().decode(DogsResponse.self, from: data).images.map { URL(string: $0)! }
         

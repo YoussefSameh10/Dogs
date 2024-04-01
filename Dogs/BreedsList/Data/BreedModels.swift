@@ -17,6 +17,6 @@ struct BreedsResponse: Codable {
     }
 }
 
-struct Breed: Codable {
+struct BreedModel: Codable {
     let name: String
 }

@@ -74,5 +74,5 @@ struct DogView: View {
 }
 
 #Preview {
-    DogsListView(store: DogsStore(breed: Breed(name: "Buhund")))
+    DogsListView(store: DogsStore(breed: BreedModel(name: "Buhund")))
 }

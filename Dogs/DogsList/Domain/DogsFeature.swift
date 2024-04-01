@@ -13,11 +13,11 @@ import Combine
 @MainActor
 @Observable final class DogsStore {
     var state: DogsState
-    private let breed: Breed
+    private let breed: BreedModel
     private let reducer: DogsReducer
     private let environment: DogsEnvironment
     
-    init(breed: Breed, reducer: DogsReducer = DogsReducer(), environment: DogsEnvironment = DogsEnvironment()) {
+    init(breed: BreedModel, reducer: DogsReducer = DogsReducer(), environment: DogsEnvironment = DogsEnvironment()) {
         self.breed = breed
         self.state = DogsState(breed: breed)
         
@@ -43,7 +43,7 @@ import Combine
 }
 
 struct DogsState {
-    let breed: Breed
+    let breed: BreedModel
     var dogs = [DogModel]()
     var favoriteDogs = [DogModel]()
     var isLoading = true
@@ -66,7 +66,7 @@ struct DogsEnvironment {
         self.repo = repo
     }
     
-    func fetchDogs(breed: Breed) async throws -> [DogModel] {
+    func fetchDogs(breed: BreedModel) async throws -> [DogModel] {
         try await repo.fetchDogs(breed: breed)
     }
     
@@ -115,7 +115,7 @@ struct DogsReducer {
 }
 
 extension Data {
-    func toDog(id: String, breed: Breed) -> DogModel? {
+    func toDog(id: String, breed: BreedModel) -> DogModel? {
         guard let image = UIImage(data: self) else { return nil }
         return DogModel(id: id, breed: breed, image: image)
     }

@@ -47,7 +47,7 @@ struct BreedsListView: View {
 }
 
 private struct BreedRow: View {
-    var breed: Breed
+    var breed: BreedModel
     
     var body: some View {
         HStack {

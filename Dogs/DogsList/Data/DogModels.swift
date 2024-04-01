@@ -23,8 +23,8 @@ struct DogsResponse: Codable {
 class DogEntity: Identifiable, Equatable {
     let id: String
     let data: Data
-    let breed: Breed
-    init(id: String, breed: Breed, data: Data) {
+    let breed: BreedModel
+    init(id: String, breed: BreedModel, data: Data) {
         self.id = id
         self.breed = breed
         self.data = data
@@ -33,10 +33,10 @@ class DogEntity: Identifiable, Equatable {
 
 struct DogModel: Identifiable, Equatable {
     let id: String
-    let breed: Breed
+    let breed: BreedModel
     let image: UIImage
     
-    init(id: String, breed: Breed, image: UIImage) {
+    init(id: String, breed: BreedModel, image: UIImage) {
         self.id = id
         self.breed = breed
         self.image = image

@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 protocol DogsRepo {
-    func fetchDogs(breed: Breed) async throws -> [DogModel]
+    func fetchDogs(breed: BreedModel) async throws -> [DogModel]
     func addToFavorites(dog: DogModel) async
     func removeFromFavorites(dog: DogModel) async
     func getFavoriteDogs() async -> [DogModel]
@@ -27,7 +27,7 @@ struct DogsRepoImpl: DogsRepo {
         self.database = database
     }
     
-    func fetchDogs(breed: Breed) async throws -> [DogModel] {
+    func fetchDogs(breed: BreedModel) async throws -> [DogModel] {
         try await network.fetchDogs(breed: breed)
     }
     

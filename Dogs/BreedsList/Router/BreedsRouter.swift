@@ -40,7 +40,7 @@ class BreedsRouter {
         return BreedsListView(store: store).toAnyView
     }
     
-    private func pushDogsListView(breed: Breed) -> AnyView {
+    private func pushDogsListView(breed: BreedModel) -> AnyView {
         var environment = DogsEnvironment()
         
         environment.goNext.receive(on: DispatchQueue.main).sink { [weak self] dog in
