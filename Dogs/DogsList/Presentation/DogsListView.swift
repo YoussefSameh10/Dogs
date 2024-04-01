@@ -7,22 +7,6 @@
 
 import SwiftUI
 
-struct DogViewModel: Identifiable, Equatable {
-    static func == (lhs: DogViewModel, rhs: DogViewModel) -> Bool {
-        lhs.id == rhs.id
-    }
-    
-    let id: String
-    let breed: Breed
-    let image: UIImage
-    
-    init(id: String, breed: Breed, image: UIImage) {
-        self.id = id
-        self.breed = breed
-        self.image = image
-    }
-}
-
 struct DogsListView: View {
     @State var store: DogsStore
     
