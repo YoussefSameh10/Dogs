@@ -11,7 +11,7 @@ import SwiftUI
 struct DogsApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView()
+            MainRouterView()
         }
     }
 }
