@@ -26,12 +26,7 @@ class FavoritesRouter {
     }
     
     private func pushFavoritesListView() -> AnyView {
-        var environment = FavoritesEnvironment()
-        
-        environment.goNext.receive(on: DispatchQueue.main).sink { [weak self] dog in
-            self?.navPath.append(Screen.dog(dog))
-        }
-        .store(in: &environment.subscriptions)
+        let environment = FavoritesEnvironment(router: self)
         
         let store = FavoritesStore(environment: environment)
         return FavoritesListView(store: store).toAnyView
@@ -50,6 +45,14 @@ struct FavoritesRouterView: View {
                 .navigationDestination(for: FavoritesRouter.Screen.self) { screen in
                     router.screenFor(screen)
                 }
+        }
+    }
+}
+
+extension FavoritesRouter: FavoritesRouterDelegate {
+    func goNext(dog: DogModel) async {
+        await MainActor.run { [weak self] in
+            self?.navPath.append(Screen.dog(dog))
         }
     }
 }

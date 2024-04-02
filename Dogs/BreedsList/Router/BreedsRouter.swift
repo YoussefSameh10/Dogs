@@ -28,12 +28,7 @@ class BreedsRouter {
     }
     
     private func pushBreedsListView() -> AnyView {
-        var environment = BreedsEnvironment()
-        
-        environment.goNext.receive(on: DispatchQueue.main).sink { [weak self] breed in
-            self?.navPath.append(Screen.dogsList(breed))
-        }
-        .store(in: &environment.subscriptions)
+        let environment = BreedsEnvironment(router: self)
         
         let store = BreedsStore(environment: environment)
         
@@ -41,12 +36,7 @@ class BreedsRouter {
     }
     
     private func pushDogsListView(breed: BreedModel) -> AnyView {
-        var environment = DogsEnvironment()
-        
-        environment.goNext.receive(on: DispatchQueue.main).sink { [weak self] dog in
-            self?.navPath.append(Screen.dog(dog))
-        }
-        .store(in: &environment.subscriptions)
+        let environment = DogsEnvironment(router: self)
         
         let store = DogsStore(breed: breed, environment: environment)
         return DogsListView(store: store).toAnyView
@@ -72,5 +62,21 @@ struct BreedsRouterView: View {
 extension View {
     var toAnyView: AnyView {
         AnyView(self)
+    }
+}
+
+extension BreedsRouter: BreedsRouterDelegate {
+    func goNext(breed: BreedModel) async {
+        await MainActor.run { [weak self] in
+            self?.navPath.append(Screen.dogsList(breed))
+        }
+    }
+}
+
+extension BreedsRouter: DogsRouterDelegate {
+    func goNext(dog: DogModel) async {
+        await MainActor.run { [weak self] in
+            self?.navPath.append(Screen.dog(dog))
+        }
     }
 }

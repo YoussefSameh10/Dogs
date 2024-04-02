@@ -51,18 +51,24 @@ enum BreedsAction {
     case search(String)
 }
 
-struct BreedsEnvironment {
-    let repo: BreedsRepo
+struct BreedsEnvironment: Sendable {
+    private let repo: BreedsRepo
+    private let router: BreedsRouterDelegate
     
-    var goNext = PassthroughSubject<BreedModel, Never>()
-    var subscriptions = Set<AnyCancellable>()
-    
-    init(repo: BreedsRepo = BreedsRepoImpl()) {
+    init(
+        repo: BreedsRepo = BreedsRepoImpl(),
+        router: BreedsRouterDelegate
+    ) {
         self.repo = repo
+        self.router = router
     }
     
     func fetchBreeds() async throws -> [BreedModel] {
         try await repo.fetchBreeds()
+    }
+    
+    func goNext(breed: BreedModel) async {
+        await router.goNext(breed: breed)
     }
 }
 
@@ -78,7 +84,7 @@ struct BreedsReducer {
             newState.isLoading = false
             return try await reduce(newState, .search(newState.searchText), environment)
         case .open(let breed):
-            environment.goNext.send(breed)
+            await environment.goNext(breed: breed)
             return newState
         case .search(let text):
             newState.filteredBreeds = filter(newState.breeds, by: text)
@@ -110,4 +116,8 @@ struct BreedsReducer {
         
         return group(filteredBreeds)
     }
+}
+
+protocol BreedsRouterDelegate: Sendable{
+    func goNext(breed: BreedModel) async
 }
