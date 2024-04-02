@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol BreedsNetworkService: Sendable {
-    func fetchBreeds()  async throws -> [BreedModel]
-}
-
 struct BreedsNetworkServiceImpl: BreedsNetworkService {
     func fetchBreeds()  async throws -> [BreedModel] {
         let (data, _) = try await URLSession.shared.data(from: URL(string: "https://dog.ceo/api/breeds/list/all")!)

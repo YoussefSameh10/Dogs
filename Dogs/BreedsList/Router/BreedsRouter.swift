@@ -8,7 +8,7 @@
 import SwiftUI
 
 @Observable @MainActor
-class BreedsRouter {
+class BreedsRouterImpl: BreedsRouter {
     var navPath = NavigationPath()
     var firstScreen: AnyView!
     
@@ -36,9 +36,9 @@ class BreedsRouter {
     }
     
     private func pushDogsListView(breed: BreedModel) -> AnyView {
-        let environment = DogsEnvironment(router: self)
+        let environment = DogsListEnvironment(router: self)
         
-        let store = DogsStore(breed: breed, environment: environment)
+        let store = DogsListStore(breed: breed, environment: environment)
         return DogsListView(store: store).toAnyView
     }
     
@@ -47,25 +47,7 @@ class BreedsRouter {
     }
 }
 
-struct BreedsRouterView: View {
-    @State var router: BreedsRouter
-    var body: some View {
-        NavigationStack(path: $router.navPath) {
-            router.firstScreen
-                .navigationDestination(for: BreedsRouter.Screen.self) { screen in
-                    router.screenFor(screen)
-                }
-        }
-    }
-}
-
-extension View {
-    var toAnyView: AnyView {
-        AnyView(self)
-    }
-}
-
-extension BreedsRouter: BreedsRouterDelegate {
+extension BreedsRouterImpl: BreedsRouterDelegate {
     func goNext(breed: BreedModel) async {
         await MainActor.run { [weak self] in
             self?.navPath.append(Screen.dogsList(breed))
@@ -73,7 +55,7 @@ extension BreedsRouter: BreedsRouterDelegate {
     }
 }
 
-extension BreedsRouter: DogsRouterDelegate {
+extension BreedsRouterImpl: DogsRouterDelegate {
     func goNext(dog: DogModel) async {
         await MainActor.run { [weak self] in
             self?.navPath.append(Screen.dog(dog))

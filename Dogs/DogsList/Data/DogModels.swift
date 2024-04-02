@@ -46,3 +46,10 @@ struct DogModel: Identifiable, Equatable {
         lhs.id == rhs.id
     }
 }
+
+extension Data {
+    func toDog(id: String, breed: BreedModel) -> DogModel? {
+        guard let image = UIImage(data: self) else { return nil }
+        return DogModel(id: id, breed: breed, image: image)
+    }
+}

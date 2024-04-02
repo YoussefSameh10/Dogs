@@ -8,12 +8,6 @@
 import Foundation
 import SwiftData
 
-protocol DogsDatabaseService: Sendable {
-    func addToFavorites(dog: DogModel) async
-    func removeFromFavorites(dog: DogModel) async
-    func getFavoriteDogs() async -> [DogModel]
-}
-
 @ModelActor
 actor DogsDatabaseServiceImpl: DogsDatabaseService {
     init?() {
@@ -38,11 +32,5 @@ actor DogsDatabaseServiceImpl: DogsDatabaseService {
     func getFavoriteDogs() async -> [DogModel] {
         let dogs = try? modelContext.fetch(FetchDescriptor<DogEntity>())
         return dogs?.compactMap { $0.data.toDog(id: $0.id, breed: $0.breed) } ?? []
-    }
-}
-
-extension DispatchQueue {
-    static var currentLabel: String {
-        return String(validatingUTF8: __dispatch_queue_get_label(nil)) ?? "unknown"
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension FavoritesRouter {
+extension FavoritesRouterImpl {
     enum Screen: Hashable {
         case favoritesList
         case dog(DogModel)

@@ -1,76 +1,11 @@
 //
-//  BreedsFeature.swift
+//  BreedsReducer.swift
 //  Dogs
 //
-//  Created by Youssef Ghattas on 25/03/2024.
+//  Created by Youssef Ghattas on 02/04/2024.
 //
 
 import Foundation
-import Combine
-
-@Observable
-@MainActor final class BreedsStore {
-    var state: BreedsState
-    private var reducer: BreedsReducer
-    private var environment: BreedsEnvironment
-    
-    init(state: BreedsState = BreedsState(), reducer: BreedsReducer = BreedsReducer(), environment: BreedsEnvironment) {
-        self.state = state
-        self.reducer = reducer
-        self.environment = environment
-        
-        send(.onAppear)
-    }
-    
-    func send(_ action: BreedsAction) {
-        Task {
-            do {
-                state = try await reducer.reduce(state, action, environment)
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-    }
-}
-
-struct BreedsState {
-    var breeds = [String: [BreedModel]]() {
-        didSet {
-            filteredBreeds = breeds
-        }
-    }
-    var filteredBreeds = [String: [BreedModel]]()
-    var isLoading = true
-    var searchText = ""
-}
-
-enum BreedsAction {
-    case onAppear
-    case loaded([BreedModel])
-    case open(BreedModel)
-    case search(String)
-}
-
-struct BreedsEnvironment: Sendable {
-    private let repo: BreedsRepo
-    private let router: BreedsRouterDelegate
-    
-    init(
-        repo: BreedsRepo = BreedsRepoImpl(),
-        router: BreedsRouterDelegate
-    ) {
-        self.repo = repo
-        self.router = router
-    }
-    
-    func fetchBreeds() async throws -> [BreedModel] {
-        try await repo.fetchBreeds()
-    }
-    
-    func goNext(breed: BreedModel) async {
-        await router.goNext(breed: breed)
-    }
-}
 
 struct BreedsReducer {
     func reduce(_ state: BreedsState, _ action: BreedsAction, _ environment: BreedsEnvironment) async throws -> BreedsState {
@@ -116,8 +51,4 @@ struct BreedsReducer {
         
         return group(filteredBreeds)
     }
-}
-
-protocol BreedsRouterDelegate: Sendable{
-    func goNext(breed: BreedModel) async
 }
