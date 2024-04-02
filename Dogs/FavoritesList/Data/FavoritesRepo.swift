@@ -8,12 +8,6 @@
 import Foundation
 import SwiftData
 
-protocol FavoritesRepo: Sendable {
-    func addToFavorites(dog: DogModel) async
-    func removeFromFavorites(dog: DogModel) async
-    func getFavoriteDogs() async -> [DogModel]
-}
-
 struct FavoritesRepoImpl: FavoritesRepo {
     private let database: DogsDatabaseService?
     

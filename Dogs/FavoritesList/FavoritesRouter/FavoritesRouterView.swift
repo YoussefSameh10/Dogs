@@ -7,6 +7,14 @@
 
 import SwiftUI
 
+@MainActor
+protocol FavoritesRouter {
+    var navPath: NavigationPath { get set }
+    var firstScreen: AnyView! { get }
+    
+    func screenFor(_ screen: FavoritesRouterImpl.Screen) -> AnyView
+}
+
 struct FavoritesRouterView: View {
     @State var router: FavoritesRouter
     var body: some View {
@@ -17,12 +25,4 @@ struct FavoritesRouterView: View {
                 }
         }
     }
-}
-
-@MainActor
-protocol FavoritesRouter {
-    var navPath: NavigationPath { get set }
-    var firstScreen: AnyView! { get }
-    
-    func screenFor(_ screen: FavoritesRouterImpl.Screen) -> AnyView
 }

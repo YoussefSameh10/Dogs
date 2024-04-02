@@ -7,6 +7,14 @@
 
 import SwiftUI
 
+@MainActor
+protocol BreedsRouter {
+    var navPath: NavigationPath { get set }
+    var firstScreen: AnyView! { get }
+    
+    func screenFor(_ screen: BreedsRouterImpl.Screen) -> AnyView
+}
+
 struct BreedsRouterView: View {
     @State var router: BreedsRouter
     var body: some View {
@@ -17,12 +25,4 @@ struct BreedsRouterView: View {
                 }
         }
     }
-}
-
-@MainActor
-protocol BreedsRouter {
-    var navPath: NavigationPath { get set }
-    var firstScreen: AnyView! { get }
-    
-    func screenFor(_ screen: BreedsRouterImpl.Screen) -> AnyView
 }

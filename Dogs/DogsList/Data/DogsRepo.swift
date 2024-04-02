@@ -8,8 +8,11 @@
 import Foundation
 import SwiftData
 
-protocol DogsRepo: Sendable {
+protocol DogsNetworkService: Sendable {
     func fetchDogs(breed: BreedModel) async throws -> [DogModel]
+}
+
+protocol DogsDatabaseService: Sendable {
     func addToFavorites(dog: DogModel) async
     func removeFromFavorites(dog: DogModel) async
     func getFavoriteDogs() async -> [DogModel]

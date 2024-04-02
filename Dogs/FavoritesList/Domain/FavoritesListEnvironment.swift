@@ -7,6 +7,16 @@
 
 import Foundation
 
+protocol FavoritesRepo: Sendable {
+    func addToFavorites(dog: DogModel) async
+    func removeFromFavorites(dog: DogModel) async
+    func getFavoriteDogs() async -> [DogModel]
+}
+
+protocol FavoritesRouterDelegate: Sendable{
+    func goNext(dog: DogModel) async
+}
+
 struct FavoritesListEnvironment: Sendable {
     private let repo: FavoritesRepo
     private let router: FavoritesRouterDelegate
@@ -34,8 +44,4 @@ struct FavoritesListEnvironment: Sendable {
     func goNext(dog: DogModel) async {
         await router.goNext(dog: dog)
     }
-}
-
-protocol FavoritesRouterDelegate: Sendable{
-    func goNext(dog: DogModel) async
 }

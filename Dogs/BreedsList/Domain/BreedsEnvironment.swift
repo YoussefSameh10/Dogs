@@ -7,6 +7,16 @@
 
 import Foundation
 
+protocol BreedsRepo: Sendable {
+    func fetchBreeds()  async throws -> [BreedModel]
+}
+
+
+protocol BreedsRouterDelegate: Sendable{
+    func goNext(breed: BreedModel) async
+}
+
+
 struct BreedsEnvironment: Sendable {
     private let repo: BreedsRepo
     private let router: BreedsRouterDelegate
@@ -26,8 +36,4 @@ struct BreedsEnvironment: Sendable {
     func goNext(breed: BreedModel) async {
         await router.goNext(breed: breed)
     }
-}
-
-protocol BreedsRouterDelegate: Sendable{
-    func goNext(breed: BreedModel) async
 }

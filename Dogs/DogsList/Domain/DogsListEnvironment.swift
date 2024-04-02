@@ -7,6 +7,17 @@
 
 import Foundation
 
+protocol DogsRepo: Sendable {
+    func fetchDogs(breed: BreedModel) async throws -> [DogModel]
+    func addToFavorites(dog: DogModel) async
+    func removeFromFavorites(dog: DogModel) async
+    func getFavoriteDogs() async -> [DogModel]
+}
+
+protocol DogsRouterDelegate: Sendable {
+    func goNext(dog: DogModel) async
+}
+
 struct DogsListEnvironment: Sendable {
     private let repo: DogsRepo
     private let router: DogsRouterDelegate
@@ -38,8 +49,4 @@ struct DogsListEnvironment: Sendable {
     func goNext(dog: DogModel) async {
         await router.goNext(dog: dog)
     }
-}
-
-protocol DogsRouterDelegate: Sendable {
-    func goNext(dog: DogModel) async
 }
