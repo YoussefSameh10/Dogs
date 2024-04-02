@@ -26,7 +26,7 @@ class FavoritesRouter {
     }
     
     private func pushFavoritesListView() -> AnyView {
-        var environment = FavoritesEnvironment(router: self)
+        let environment = FavoritesEnvironment(router: self)
         
         let store = FavoritesStore(environment: environment)
         return FavoritesListView(store: store).toAnyView

@@ -60,7 +60,7 @@ private struct BreedRow: View {
         }
     }
 }
-
-#Preview {
-    BreedsListView(store: BreedsStore(environment: BreedsEnvironment()))
-}
+//
+//#Preview {
+//    BreedsListView(store: BreedsStore(environment: BreedsEnvironment()))
+//}

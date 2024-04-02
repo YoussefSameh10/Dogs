@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol BreedsRepo {
+protocol BreedsRepo: Sendable {
     func fetchBreeds()  async throws -> [BreedModel]
 }
 
