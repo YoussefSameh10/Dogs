@@ -73,6 +73,6 @@ struct DogView: View {
     }
 }
 
-#Preview {
-    DogsListView(store: DogsStore(breed: BreedModel(name: "Buhund")))
-}
+//#Preview {
+//    DogsListView(store: DogsStore(breed: BreedModel(name: "Buhund")))
+//}

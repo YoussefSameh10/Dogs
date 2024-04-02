@@ -17,7 +17,7 @@ import Combine
     private let reducer: DogsReducer
     private let environment: DogsEnvironment
     
-    init(breed: BreedModel, reducer: DogsReducer = DogsReducer(), environment: DogsEnvironment = DogsEnvironment()) {
+    init(breed: BreedModel, reducer: DogsReducer = DogsReducer(), environment: DogsEnvironment) {
         self.breed = breed
         self.state = DogsState(breed: breed)
         
@@ -56,14 +56,16 @@ enum DogsAction {
     case tapFavorites(DogModel)
 }
 
-struct DogsEnvironment {
-    let repo: DogsRepo
+struct DogsEnvironment: Sendable {
+    private let repo: DogsRepo
+    private let router: DogsRouterDelegate
     
-    var goNext = PassthroughSubject<DogModel,Never>()
-    var subscriptions = Set<AnyCancellable>()
-    
-    init(repo: DogsRepo = DogsRepoImpl()) {
+    init(
+        repo: DogsRepo = DogsRepoImpl(),
+        router: DogsRouterDelegate
+    ) {
         self.repo = repo
+        self.router = router
     }
     
     func fetchDogs(breed: BreedModel) async throws -> [DogModel] {
@@ -80,6 +82,10 @@ struct DogsEnvironment {
     
     func getFavoriteDogs() async -> [DogModel] {
         await repo.getFavoriteDogs()
+    }
+    
+    func goNext(dog: DogModel) async {
+        await router.goNext(dog: dog)
     }
 }
 
@@ -98,7 +104,7 @@ struct DogsReducer {
             newState.isLoading = false
             return newState
         case .tapDog(let dog):
-            environment.goNext.send(dog)
+            await environment.goNext(dog: dog)
             return newState
         case .tapFavorites(let dog):
             if newState.favoriteDogs.contains(where: { $0 == dog }) {
@@ -119,4 +125,8 @@ extension Data {
         guard let image = UIImage(data: self) else { return nil }
         return DogModel(id: id, breed: breed, image: image)
     }
+}
+
+protocol DogsRouterDelegate: Sendable {
+    func goNext(dog: DogModel) async
 }

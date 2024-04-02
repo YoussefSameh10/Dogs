@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol DogsNetworkService {
+protocol DogsNetworkService: Sendable {
     func fetchDogs(breed: BreedModel) async throws -> [DogModel]
 }
 
