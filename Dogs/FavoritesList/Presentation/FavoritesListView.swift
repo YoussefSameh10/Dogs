@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FavoritesListView: View {
-    @State var store: FavoritesStore
+    @State var store: FavoritesListStore
     
     var body: some View {
         ScrollView {

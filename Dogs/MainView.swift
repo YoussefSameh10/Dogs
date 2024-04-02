@@ -10,14 +10,14 @@ import SwiftUI
 struct MainView: View {
     var body: some View {
         TabView {
-            BreedsRouterView(router: BreedsRouter())
+            BreedsRouterView(router: BreedsRouterImpl())
                 .tabItem {
                     VStack {
                         Image(systemName: "list.bullet")
                         Text("All")
                     }
                 }
-            FavoritesRouterView(router: FavoritesRouter())
+            FavoritesRouterView(router: FavoritesRouterImpl())
                 .tabItem {
                     VStack {
                         Image(systemName: "star.fill")

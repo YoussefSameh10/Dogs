@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension BreedsRouter {
+extension BreedsRouterImpl {
     enum Screen: Hashable {
         case breedsList
         case dogsList(BreedModel)

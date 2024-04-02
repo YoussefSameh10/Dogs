@@ -8,7 +8,7 @@
 import SwiftUI
 
 @Observable @MainActor
-class FavoritesRouter {
+class FavoritesRouterImpl: FavoritesRouter {
     var navPath = NavigationPath()
     var firstScreen: AnyView!
     
@@ -26,9 +26,9 @@ class FavoritesRouter {
     }
     
     private func pushFavoritesListView() -> AnyView {
-        let environment = FavoritesEnvironment(router: self)
+        let environment = FavoritesListEnvironment(router: self)
         
-        let store = FavoritesStore(environment: environment)
+        let store = FavoritesListStore(environment: environment)
         return FavoritesListView(store: store).toAnyView
     }
     
@@ -37,19 +37,7 @@ class FavoritesRouter {
     }
 }
 
-struct FavoritesRouterView: View {
-    @State var router: FavoritesRouter
-    var body: some View {
-        NavigationStack(path: $router.navPath) {
-            router.firstScreen
-                .navigationDestination(for: FavoritesRouter.Screen.self) { screen in
-                    router.screenFor(screen)
-                }
-        }
-    }
-}
-
-extension FavoritesRouter: FavoritesRouterDelegate {
+extension FavoritesRouterImpl: FavoritesRouterDelegate {
     func goNext(dog: DogModel) async {
         await MainActor.run { [weak self] in
             self?.navPath.append(Screen.dog(dog))

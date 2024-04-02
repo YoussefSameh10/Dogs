@@ -40,9 +40,3 @@ actor DogsDatabaseServiceImpl: DogsDatabaseService {
         return dogs?.compactMap { $0.data.toDog(id: $0.id, breed: $0.breed) } ?? []
     }
 }
-
-extension DispatchQueue {
-    static var currentLabel: String {
-        return String(validatingUTF8: __dispatch_queue_get_label(nil)) ?? "unknown"
-    }
-}
