@@ -18,7 +18,7 @@ import Combine
     init(
         state: FavoritesState = FavoritesState(),
         reducer: FavoritesReducer = FavoritesReducer(),
-        environment: FavoritesEnvironment = FavoritesEnvironment()
+        environment: FavoritesEnvironment
     ) {
         self.state = state
         self.reducer = reducer
@@ -48,13 +48,16 @@ enum FavoritesAction {
     case tapFavorite(DogModel)
 }
 
-struct FavoritesEnvironment {
-    let repo: FavoritesRepo
-    var goNext = PassthroughSubject<DogModel, Never>()
-    var subscriptions = Set<AnyCancellable>()
+struct FavoritesEnvironment: Sendable {
+    private let repo: FavoritesRepo
+    private let router: FavoritesRouterDelegate
     
-    init(repo: FavoritesRepo = FavoritesRepoImpl()) {
+    init(
+        repo: FavoritesRepo = FavoritesRepoImpl(),
+        router: FavoritesRouterDelegate
+    ) {
         self.repo = repo
+        self.router = router
     }
     
     func addToFavorites(dog: DogModel) async {
@@ -67,6 +70,10 @@ struct FavoritesEnvironment {
     
     func getFavoriteDogs() async -> [DogModel] {
         await repo.getFavoriteDogs()
+    }
+    
+    func goNext(dog: DogModel) async {
+        await router.goNext(dog: dog)
     }
 }
 
@@ -83,7 +90,7 @@ struct FavoritesReducer {
             newState.favoriteDogs = dogs
             return newState
         case .tapDog(let dog):
-            environment.goNext.send(dog)
+            await environment.goNext(dog: dog)
             return newState
         case .tapFavorite(let dog):
             if newState.favoriteDogs.contains(where: { $0 == dog }) {
@@ -96,4 +103,8 @@ struct FavoritesReducer {
             return newState
         }
     }
+}
+
+protocol FavoritesRouterDelegate: Sendable{
+    func goNext(dog: DogModel) async
 }
