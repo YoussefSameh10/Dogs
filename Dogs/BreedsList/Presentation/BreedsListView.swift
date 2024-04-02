@@ -43,6 +43,9 @@ struct BreedsListView: View {
                 }
             }
         }
+        .task {
+            store.send(.onAppear)
+        }
     }
 }
 

@@ -31,7 +31,7 @@ struct DogsRepoImpl: DogsRepo {
     }
     
     func fetchDogs(breed: BreedModel) async throws -> [DogModel] {
-        try await network.fetchDogs(breed: breed)
+        try await network.fetchDogs(breed: breed).sorted { $0.id < $1.id }
     }
     
     func addToFavorites(dog: DogModel) async {
@@ -43,6 +43,6 @@ struct DogsRepoImpl: DogsRepo {
     }
     
     func getFavoriteDogs() async -> [DogModel] {
-        await database?.getFavoriteDogs() ?? []
+        await database?.getFavoriteDogs().sorted { $0.id < $1.id } ?? []
     }
 }

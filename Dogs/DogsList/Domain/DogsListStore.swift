@@ -22,9 +22,7 @@ import Combine
         self.state = DogsListState(breed: breed)
         
         self.reducer = reducer
-        self.environment = environment
-        
-        send(.onAppear)
+        self.environment = environment        
     }
     
     func send(_ action: DogsListAction) {

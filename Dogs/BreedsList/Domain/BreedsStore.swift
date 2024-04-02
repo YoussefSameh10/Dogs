@@ -17,9 +17,7 @@ import Combine
     init(state: BreedsState = BreedsState(), reducer: BreedsReducer = BreedsReducer(), environment: BreedsEnvironment) {
         self.state = state
         self.reducer = reducer
-        self.environment = environment
-        
-        send(.onAppear)
+        self.environment = environment        
     }
     
     func send(_ action: BreedsAction) {
