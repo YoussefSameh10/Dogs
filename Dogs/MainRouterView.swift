@@ -1,5 +1,5 @@
 //
-//  MainView.swift
+//  MainRouterView.swift
 //  Dogs
 //
 //  Created by Youssef Ghattas on 24/03/2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MainView: View {
+struct MainRouterView: View {
     var body: some View {
         TabView {
             BreedsRouterView(router: BreedsRouterImpl())
@@ -27,8 +27,4 @@ struct MainView: View {
         }
         .tint(Color.cyan)
     }
-}
-
-#Preview {
-    MainView()
 }

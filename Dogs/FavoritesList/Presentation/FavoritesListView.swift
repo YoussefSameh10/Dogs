@@ -37,3 +37,14 @@ struct FavoritesListView: View {
         }
     }
 }
+
+#Preview {
+    FavoritesListView(
+        store: FavoritesListStore(
+            environment: FavoritesListEnvironment(
+                repo: FavoritesRepoStub(),
+                router: FavoritesRouterStub()
+            )
+        )
+    )
+}

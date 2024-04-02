@@ -37,6 +37,14 @@ struct DogsListView: View {
     }
 }
 
-//#Preview {
-//    DogsListView(store: DogsStore(breed: BreedModel(name: "Buhund")))
-//}
+#Preview {
+    DogsListView(
+        store: DogsListStore(
+            breed: BreedModel(name: "Husky"),
+            environment: DogsListEnvironment(
+                repo: DogsRepoStub(),
+                router: DogsRouterStub()
+            )
+        )
+    )
+}

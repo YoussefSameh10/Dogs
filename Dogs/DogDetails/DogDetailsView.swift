@@ -34,5 +34,11 @@ struct DogDetailsView: View {
 }
 
 #Preview {
-    DogDetailsView(dog: DogModel(id: "Huskey", breed: BreedModel(name: "Huskey"), image: UIImage(systemName: "dog")!))
+    DogDetailsView(
+        dog: DogModel(
+            id: "1",
+            breed: BreedModel(name: "Husky"),
+            image: UIImage(systemName: "dog")!
+        )
+    )
 }
