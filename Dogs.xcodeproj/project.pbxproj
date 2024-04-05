@@ -15,6 +15,8 @@
 		C6974ED92BC0845200090DF5 /* BreedsNetworkEntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6974ED82BC0845200090DF5 /* BreedsNetworkEntityMapper.swift */; };
 		C6974EDB2BC0857600090DF5 /* BreedModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6974EDA2BC0857600090DF5 /* BreedModelMapper.swift */; };
 		C6974EDD2BC08CB500090DF5 /* DogEntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6974EDC2BC08CB500090DF5 /* DogEntityMapper.swift */; };
+		C6974EDF2BC09BF400090DF5 /* DogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6974EDE2BC09BF400090DF5 /* DogViewModel.swift */; };
+		C6974EE12BC09C5700090DF5 /* DogModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6974EE02BC09C5700090DF5 /* DogModelMapper.swift */; };
 		C6B0BE5E2BBCAC6B003E3266 /* BreedsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B0BE5D2BBCAC6B003E3266 /* BreedsState.swift */; };
 		C6B0BE602BBCAC86003E3266 /* BreedsAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B0BE5F2BBCAC86003E3266 /* BreedsAction.swift */; };
 		C6B0BE622BBCACB3003E3266 /* BreedsEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B0BE612BBCACB3003E3266 /* BreedsEnvironment.swift */; };
@@ -70,6 +72,8 @@
 		C6974ED82BC0845200090DF5 /* BreedsNetworkEntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedsNetworkEntityMapper.swift; sourceTree = "<group>"; };
 		C6974EDA2BC0857600090DF5 /* BreedModelMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedModelMapper.swift; sourceTree = "<group>"; };
 		C6974EDC2BC08CB500090DF5 /* DogEntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogEntityMapper.swift; sourceTree = "<group>"; };
+		C6974EDE2BC09BF400090DF5 /* DogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogViewModel.swift; sourceTree = "<group>"; };
+		C6974EE02BC09C5700090DF5 /* DogModelMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogModelMapper.swift; sourceTree = "<group>"; };
 		C6B0BE5D2BBCAC6B003E3266 /* BreedsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedsState.swift; sourceTree = "<group>"; };
 		C6B0BE5F2BBCAC86003E3266 /* BreedsAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedsAction.swift; sourceTree = "<group>"; };
 		C6B0BE612BBCACB3003E3266 /* BreedsEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedsEnvironment.swift; sourceTree = "<group>"; };
@@ -201,6 +205,8 @@
 				C6BAB1842BB0881900F158C6 /* DogsListView.swift */,
 				C6B0BE6E2BBCB310003E3266 /* DogsListState.swift */,
 				C6B0BE702BBCB31D003E3266 /* DogsListAction.swift */,
+				C6974EDE2BC09BF400090DF5 /* DogViewModel.swift */,
+				C6974EE02BC09C5700090DF5 /* DogModelMapper.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -470,6 +476,7 @@
 				C6B0BE682BBCB0F5003E3266 /* View+Extension.swift in Sources */,
 				C6B0BE832BBCBB9D003E3266 /* BreedsRoterStub.swift in Sources */,
 				C6974EDD2BC08CB500090DF5 /* DogEntityMapper.swift in Sources */,
+				C6974EDF2BC09BF400090DF5 /* DogViewModel.swift in Sources */,
 				C6B0BE882BBCC076003E3266 /* DogsRouterStub.swift in Sources */,
 				C6BAB1852BB0881900F158C6 /* DogsListView.swift in Sources */,
 				C6B0BE7F2BBCB59F003E3266 /* FavoritesRouterView.swift in Sources */,
@@ -479,6 +486,7 @@
 				C6B0BE622BBCACB3003E3266 /* BreedsEnvironment.swift in Sources */,
 				C6B5510C2BBA10170059C53C /* FavoritesRepo.swift in Sources */,
 				C6974ED92BC0845200090DF5 /* BreedsNetworkEntityMapper.swift in Sources */,
+				C6974EE12BC09C5700090DF5 /* DogModelMapper.swift in Sources */,
 				C6B0BE752BBCB33A003E3266 /* DogsListEnvironment.swift in Sources */,
 				C6B0BE5E2BBCAC6B003E3266 /* BreedsState.swift in Sources */,
 				C6BAB17B2BB0750B00F158C6 /* BreedsListView.swift in Sources */,

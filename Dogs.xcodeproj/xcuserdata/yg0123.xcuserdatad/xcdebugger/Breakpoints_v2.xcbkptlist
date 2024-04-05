@@ -3,4 +3,82 @@
    uuid = "9A86DB21-97A4-4A53-8835-CDA1E8179432"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A5940E67-E5E9-47FA-A1A0-971FB037F18A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dogs/DogsList/Data/DogsRepo.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "addToFavorites(dog:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A5940E67-E5E9-47FA-A1A0-971FB037F18A - adfb5db8560f2a37"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Dogs.DogsRepoImpl.addToFavorites(dog: Dogs.DogModel) async -&gt; ()"
+                  moduleName = "Dogs"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yg0123/Desktop/Others/Self%20Development/iOS/Trials/Dogs/Dogs/DogsList/Data/DogsRepo.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42">
+               </Location>
+               <Location
+                  uuid = "A5940E67-E5E9-47FA-A1A0-971FB037F18A - be515cd65be7e625"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for Dogs.DogsRepoImpl.addToFavorites(dog: Dogs.DogModel) async -&gt; ()"
+                  moduleName = "Dogs"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yg0123/Desktop/Others/Self%20Development/iOS/Trials/Dogs/Dogs/DogsList/Data/DogsRepo.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42">
+               </Location>
+               <Location
+                  uuid = "A5940E67-E5E9-47FA-A1A0-971FB037F18A - 323e7d37d7726809"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Dogs.DogsRepoImpl.addToFavorites(dog: Dogs.DogModel) async -&gt; ()"
+                  moduleName = "Dogs"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yg0123/Desktop/Others/Self%20Development/iOS/Trials/Dogs/Dogs/DogsList/Data/DogsRepo.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "745B5FFA-C75B-4CF4-8D86-7C7A592A50F0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dogs/DogsList/Data/Service/DogsDatabaseService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "addToFavorites(dog:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

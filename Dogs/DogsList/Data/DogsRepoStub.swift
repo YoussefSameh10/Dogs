@@ -10,21 +10,21 @@ import UIKit
 struct DogsRepoStub: DogsRepo {
     let breed = BreedModel(name: "Husky")
     var dogs: [DogModel] {
-        guard let image = UIImage(systemName: "dog.fill") else { return [] }
+        guard let data = UIImage(systemName: "dog.fill")?.pngData() else { return [] }
         return [
-            DogModel(id: "1", breed: breed, image: image),
-            DogModel(id: "2", breed: breed, image: image),
-            DogModel(id: "3", breed: breed, image: image),
-            DogModel(id: "4", breed: breed, image: image),
-            DogModel(id: "5", breed: breed, image: image)
+            DogModel(id: "1", breed: breed, data: data),
+            DogModel(id: "2", breed: breed, data: data),
+            DogModel(id: "3", breed: breed, data: data),
+            DogModel(id: "4", breed: breed, data: data),
+            DogModel(id: "5", breed: breed, data: data)
         ]
     }
     
     var favoriteDogs: [DogModel] {
-        guard let image = UIImage(systemName: "dog") else { return [] }
+        guard let data = UIImage(systemName: "dog")?.pngData() else { return [] }
         return [
-            DogModel(id: "3", breed: breed, image: image),
-            DogModel(id: "5", breed: breed, image: image)
+            DogModel(id: "3", breed: breed, data: data),
+            DogModel(id: "5", breed: breed, data: data)
         ]
     }
     

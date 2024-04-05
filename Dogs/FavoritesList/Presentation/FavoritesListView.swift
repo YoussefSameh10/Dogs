@@ -19,12 +19,12 @@ struct FavoritesListView: View {
                     .padding(.top, 48)
             } else {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: UIScreen.main.bounds.width/2 - 4))], spacing: 8) {
-                    ForEach(store.state.favoriteDogs) { dog in
+                    ForEach(store.state.favoriteDogs.map { $0.toDogViewModel }) { dog in
                         DogView(
                             dog: dog,
-                            isFavorite: store.isFavorite(dog: dog),
-                            onTapDog: { store.send(.tapDog(dog)) },
-                            onTapFavorite: { store.send(.tapFavorite(dog)) }
+                            isFavorite: store.isFavorite(dog: dog.toDogModel),
+                            onTapDog: { store.send(.tapDog(dog.toDogModel)) },
+                            onTapFavorite: { store.send(.tapFavorite(dog.toDogModel)) }
                         )
                     }
                 }

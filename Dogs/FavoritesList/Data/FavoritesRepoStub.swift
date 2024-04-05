@@ -10,10 +10,10 @@ import UIKit
 struct FavoritesRepoStub: FavoritesRepo {
     let breed = BreedModel(name: "Husky")
     var favoriteDogs: [DogModel] {
-        guard let image = UIImage(systemName: "dog") else { return [] }
+        guard let data = UIImage(systemName: "dog")?.pngData() else { return [] }
         return [
-            DogModel(id: "3", breed: breed, image: image),
-            DogModel(id: "5", breed: breed, image: image)
+            DogModel(id: "3", breed: breed, data: data),
+            DogModel(id: "5", breed: breed, data: data)
         ]
     }
     

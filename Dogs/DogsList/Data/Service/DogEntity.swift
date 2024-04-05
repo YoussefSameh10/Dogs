@@ -9,11 +9,12 @@ import SwiftData
 import Foundation
 
 @Model
-class DogEntity: Identifiable, Equatable {
+final class DogEntity: Identifiable, Equatable, Sendable {
     let id: String
     let data: Data
-    let breed: BreedModel
-    init(id: String, breed: BreedModel, data: Data) {
+    let breed: String
+    
+    init(id: String, breed: String, data: Data) {
         self.id = id
         self.breed = breed
         self.data = data

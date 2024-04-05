@@ -6,3 +6,21 @@
 //
 
 import Foundation
+
+extension DogNetworkEntity {
+    func toDogModel(with breed: String) -> DogModel {
+        DogModel(id: self.id, breed: BreedModel(name: breed), data: data)
+    }
+}
+
+extension DogEntity {
+    var toDogModel: DogModel {
+        DogModel(id: self.id, breed: BreedModel(name: self.breed), data: self.data)
+    }
+}
+
+extension DogModel {
+    var toDogEntity: DogEntity {
+        DogEntity(id: self.id, breed: self.breed.name, data: self.data)
+    }
+}

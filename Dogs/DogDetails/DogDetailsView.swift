@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DogDetailsView: View {
-    var dog: DogModel
+    var dog: DogViewModel
     @GestureState var scale = 1.0
     
     var magnifyGesture: some Gesture {
@@ -35,9 +35,9 @@ struct DogDetailsView: View {
 
 #Preview {
     DogDetailsView(
-        dog: DogModel(
+        dog: DogViewModel(
             id: "1",
-            breed: BreedModel(name: "Husky"),
+            breed: BreedViewModel(name: "Husky"),
             image: UIImage(systemName: "dog")!
         )
     )

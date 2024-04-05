@@ -15,12 +15,11 @@ actor DogsDatabaseServiceImpl: DogsDatabaseService {
         modelExecutor = DefaultSerialModelExecutor(modelContext: modelContext)
         modelContainer = container
     }
-    func addToFavorites(dog: DogModel) async {
-        guard let data = dog.image.pngData() else { return }
-        modelContext.insert(DogEntity(id: dog.id, breed: dog.breed, data: data))
+    func addToFavorites(dog: DogEntity) async {
+        modelContext.insert(dog)
     }
     
-    func removeFromFavorites(dog: DogModel) async {
+    func removeFromFavorites(dog: DogEntity) async {
         guard let dogToDelete = try? modelContext
             .fetch(FetchDescriptor<DogEntity>())
             .first(where: { $0.id == dog.id})
@@ -28,8 +27,8 @@ actor DogsDatabaseServiceImpl: DogsDatabaseService {
         modelContext.delete(dogToDelete)
     }
     
-    func getFavoriteDogs() async -> [DogModel] {
+    func getFavoriteDogs() async -> [DogEntity] {
         let dogs = try? modelContext.fetch(FetchDescriptor<DogEntity>())
-        return dogs?.compactMap { $0.data.toDog(id: $0.id, breed: $0.breed) } ?? []
+        return dogs?.compactMap { $0 } ?? []
     }
 }

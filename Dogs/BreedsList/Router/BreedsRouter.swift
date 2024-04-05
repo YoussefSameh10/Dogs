@@ -43,7 +43,7 @@ class BreedsRouterImpl: BreedsRouter {
     }
     
     private func pushDogDetailsView(dog: DogModel) -> AnyView {
-        return DogDetailsView(dog: dog).toAnyView
+        return DogDetailsView(dog: dog.toDogViewModel).toAnyView
     }
 }
 
