@@ -11,9 +11,9 @@ protocol DogsNetworkService: Sendable {
 }
 
 protocol DogsDatabaseService: Sendable {
-    func addToFavorites(dog: DogEntity) async
-    func removeFromFavorites(dog: DogEntity) async
-    func getFavoriteDogs() async -> [DogEntity]
+    func addToFavorites(dog: DogModel) async
+    func removeFromFavorites(dog: DogModel) async
+    func getFavoriteDogs() async -> [DogModel]
 }
 
 struct DogsRepoImpl: DogsRepo {
@@ -39,14 +39,14 @@ struct DogsRepoImpl: DogsRepo {
     }
     
     func addToFavorites(dog: DogModel) async {
-        await database?.addToFavorites(dog: dog.toDogEntity)
+        await database?.addToFavorites(dog: dog)
     }
     
     func removeFromFavorites(dog: DogModel) async {
-        await database?.removeFromFavorites(dog: dog.toDogEntity)
+        await database?.removeFromFavorites(dog: dog)
     }
     
     func getFavoriteDogs() async -> [DogModel] {
-        await database?.getFavoriteDogs().map { $0.toDogModel }.sorted { $0.id < $1.id } ?? []
+        await database?.getFavoriteDogs().sorted { $0.id < $1.id } ?? []
     }
 }

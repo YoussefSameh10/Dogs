@@ -13,14 +13,14 @@ struct FavoritesRepoImpl: FavoritesRepo {
     }
     
     func addToFavorites(dog: DogModel) async {
-        await database?.addToFavorites(dog: dog.toDogEntity)
+        await database?.addToFavorites(dog: dog)
     }
     
     func removeFromFavorites(dog: DogModel) async {
-        await database?.removeFromFavorites(dog: dog.toDogEntity)
+        await database?.removeFromFavorites(dog: dog)
     }
     
     func getFavoriteDogs() async -> [DogModel] {
-        await database?.getFavoriteDogs().map { $0.toDogModel } ?? []
+        await database?.getFavoriteDogs() ?? []
     }
 }

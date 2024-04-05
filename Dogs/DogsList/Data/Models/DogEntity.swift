@@ -9,7 +9,7 @@ import SwiftData
 import Foundation
 
 @Model
-final class DogEntity: Identifiable, Equatable, Sendable {
+class DogEntity: Identifiable, Equatable {
     let id: String
     let data: Data
     let breed: String
