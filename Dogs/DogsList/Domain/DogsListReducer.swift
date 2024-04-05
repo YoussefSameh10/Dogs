@@ -5,8 +5,6 @@
 //  Created by Youssef Ghattas on 02/04/2024.
 //
 
-import Foundation
-
 struct DogsListReducer {
     func reduce(_ state: DogsListState, _ action: DogsListAction, _ environment: DogsListEnvironment) async throws -> DogsListState {
         var newState = state

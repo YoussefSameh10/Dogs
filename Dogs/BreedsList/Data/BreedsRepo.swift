@@ -5,8 +5,6 @@
 //  Created by Youssef Ghattas on 31/03/2024.
 //
 
-import Foundation
-
 protocol BreedsNetworkService: Sendable {
     func fetchBreeds()  async throws -> [BreedModel]
 }

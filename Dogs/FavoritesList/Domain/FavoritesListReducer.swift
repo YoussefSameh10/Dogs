@@ -5,8 +5,6 @@
 //  Created by Youssef Ghattas on 02/04/2024.
 //
 
-import Foundation
-
 struct FavoritesListReducer {
     func reduce(_ state: FavoritesListState, _ action: FavoritesListAction, _ environment: FavoritesListEnvironment) async -> FavoritesListState {
         var newState = state

@@ -1,35 +1,11 @@
 //
-//  DogModels.swift
+//  DogModel.swift
 //  Dogs
 //
-//  Created by Youssef Ghattas on 01/04/2024.
+//  Created by Youssef Ghattas on 05/04/2024.
 //
 
-import Foundation
-import SwiftData
 import UIKit
-
-struct DogsResponse: Codable {
-    var images: [String]
-    var status: String
-    
-    private enum CodingKeys: String, CodingKey {
-        case images = "message"
-        case status
-    }
-}
-
-@Model
-class DogEntity: Identifiable, Equatable {
-    let id: String
-    let data: Data
-    let breed: BreedModel
-    init(id: String, breed: BreedModel, data: Data) {
-        self.id = id
-        self.breed = breed
-        self.data = data
-    }
-}
 
 struct DogModel: Identifiable, Equatable {
     let id: String

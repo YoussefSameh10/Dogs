@@ -5,8 +5,6 @@
 //  Created by Youssef Ghattas on 02/04/2024.
 //
 
-import Foundation
-
 protocol DogsRepo: Sendable {
     func fetchDogs(breed: BreedModel) async throws -> [DogModel]
     func cancelFetch() async

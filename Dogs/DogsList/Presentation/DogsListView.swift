@@ -22,7 +22,7 @@ struct DogsListView: View {
                     ForEach(store.state.dogs) { dog in
                         DogView(
                             dog: dog,
-                            isFavorite: store.isFavorite(dog: dog),
+                            isFavorite: store.state.isFavorite(dog: dog),
                             onTapDog: {
                                 store.send(.tapDog(dog))
                             },
