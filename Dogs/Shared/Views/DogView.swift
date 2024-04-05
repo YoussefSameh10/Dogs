@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DogView: View {
-    var dog: DogModel
+    var dog: DogViewModel
     var isFavorite: Bool
     var onTapDog: () -> ()
     var onTapFavorite: () -> ()

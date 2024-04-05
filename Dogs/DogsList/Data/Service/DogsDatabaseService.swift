@@ -16,8 +16,7 @@ actor DogsDatabaseServiceImpl: DogsDatabaseService {
         modelContainer = container
     }
     func addToFavorites(dog: DogModel) async {
-        guard let data = dog.image.pngData() else { return }
-        modelContext.insert(DogEntity(id: dog.id, breed: dog.breed, data: data))
+        modelContext.insert(dog.toDogEntity)
     }
     
     func removeFromFavorites(dog: DogModel) async {
@@ -30,6 +29,6 @@ actor DogsDatabaseServiceImpl: DogsDatabaseService {
     
     func getFavoriteDogs() async -> [DogModel] {
         let dogs = try? modelContext.fetch(FetchDescriptor<DogEntity>())
-        return dogs?.compactMap { $0.data.toDog(id: $0.id, breed: $0.breed) } ?? []
+        return dogs?.compactMap { $0.toDogModel } ?? []
     }
 }

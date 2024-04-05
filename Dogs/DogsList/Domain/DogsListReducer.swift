@@ -15,8 +15,8 @@ struct DogsListReducer {
             let favoriteDogs = await environment.getFavoriteDogs()
             return try await reduce(newState, .loaded(dogs: dogs, favoriteDogs: favoriteDogs), environment)
         case .loaded(let dogs, let favoriteDogs):
-            newState.dogs = dogs
-            newState.favoriteDogs = favoriteDogs
+            newState.dogs = dogs.sorted(by: { $0.id < $1.id })
+            newState.favoriteDogs = favoriteDogs.sorted(by: { $0.id < $1.id })
             newState.isLoading = false
             return newState
         case .tapDog(let dog):

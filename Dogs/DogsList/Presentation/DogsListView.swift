@@ -19,18 +19,18 @@ struct DogsListView: View {
                     .padding(.top, 48)
             } else {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: UIScreen.main.bounds.width/2 - 4))], spacing: 8) {
-                    ForEach(store.state.dogs) { dog in
+                    ForEach(store.state.dogs.map { $0.toDogViewModel }) { dog in
                         DogView(
                             dog: dog,
-                            isFavorite: store.state.isFavorite(dog: dog),
+                            isFavorite: store.state.isFavorite(dog: dog.toDogModel),
                             onTapDog: {
-                                store.send(.tapDog(dog))
+                                store.send(.tapDog(dog.toDogModel))
                             },
-                            onTapFavorite: { store.send(.tapFavorites(dog)) }
+                            onTapFavorite: { store.send(.tapFavorites(dog.toDogModel)) }
                         )
                     }
                 }
-                .navigationTitle(store.state.breed.name.capitalized)
+                .navigationTitle(store.state.breed.toBreedViewModel.name.capitalized)
             }
         }
         .background(content: { Color.gray.opacity(0.2) })
