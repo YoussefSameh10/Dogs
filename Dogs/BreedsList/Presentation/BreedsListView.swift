@@ -21,10 +21,10 @@ struct BreedsListView: View {
                 List {
                     ForEach(store.state.filteredBreeds.keys.sorted(), id: \.self) { key in
                         Section(header: Text(key.capitalized)) {
-                            ForEach(store.state.filteredBreeds[key]!, id: \.name) { breed in
+                            ForEach(store.state.filteredBreeds[key]!.map { $0.toBreedViewModel }, id: \.name) { breed in
                                 Button(
                                     action: {
-                                        store.send(.open(breed))
+                                        store.send(.open(breed.toBreedModel))
                                     },
                                     label: {
                                         BreedRow(breed: breed)
@@ -49,7 +49,7 @@ struct BreedsListView: View {
 }
 
 private struct BreedRow: View {
-    var breed: BreedModel
+    var breed: BreedViewModel
     
     var body: some View {
         HStack {
