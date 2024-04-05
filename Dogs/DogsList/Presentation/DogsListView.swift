@@ -37,6 +37,9 @@ struct DogsListView: View {
         .task {
             store.send(.onAppear)
         }
+        .onDisappear {
+            store.send(.onDisappear)
+        }
     }
 }
 

@@ -9,6 +9,7 @@ import Foundation
 
 protocol DogsRepo: Sendable {
     func fetchDogs(breed: BreedModel) async throws -> [DogModel]
+    func cancelFetch() async
     func addToFavorites(dog: DogModel) async
     func removeFromFavorites(dog: DogModel) async
     func getFavoriteDogs() async -> [DogModel]
@@ -32,6 +33,10 @@ struct DogsListEnvironment: Sendable {
     
     func fetchDogs(breed: BreedModel) async throws -> [DogModel] {
         try await repo.fetchDogs(breed: breed)
+    }
+    
+    func cancelFetch() async {
+        await repo.cancelFetch()
     }
     
     func addToFavorites(dog: DogModel) async {
