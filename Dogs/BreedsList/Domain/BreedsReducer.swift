@@ -28,7 +28,7 @@ struct BreedsReducer {
     private func group(_ breeds: [BreedModel]) -> [String: [BreedModel]] {
         var result = [String: [BreedModel]]()
         
-        for breed in breeds {
+        for breed in breeds.sorted(by: { $0.name < $1.name }) {
             let firstLetter = String(breed.name.prefix(1)).uppercased()
             if var group = result[firstLetter] {
                 group.append(breed)

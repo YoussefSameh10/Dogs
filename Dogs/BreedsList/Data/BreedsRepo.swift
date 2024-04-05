@@ -6,7 +6,7 @@
 //
 
 protocol BreedsNetworkService: Sendable {
-    func fetchBreeds()  async throws -> [BreedModel]
+    func fetchBreeds()  async throws -> BreedsNetworkEntity
 }
 
 struct BreedsRepoImpl: BreedsRepo {
@@ -18,5 +18,6 @@ struct BreedsRepoImpl: BreedsRepo {
     
     func fetchBreeds()  async throws -> [BreedModel] {
         try await network.fetchBreeds()
+            .toBreedModels
     }
 }

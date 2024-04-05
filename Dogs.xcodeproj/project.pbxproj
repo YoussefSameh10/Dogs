@@ -14,6 +14,7 @@
 		C6974ED72BC0815500090DF5 /* BreedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6974ED62BC0815500090DF5 /* BreedViewModel.swift */; };
 		C6974ED92BC0845200090DF5 /* BreedsNetworkEntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6974ED82BC0845200090DF5 /* BreedsNetworkEntityMapper.swift */; };
 		C6974EDB2BC0857600090DF5 /* BreedModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6974EDA2BC0857600090DF5 /* BreedModelMapper.swift */; };
+		C6974EDD2BC08CB500090DF5 /* DogEntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6974EDC2BC08CB500090DF5 /* DogEntityMapper.swift */; };
 		C6B0BE5E2BBCAC6B003E3266 /* BreedsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B0BE5D2BBCAC6B003E3266 /* BreedsState.swift */; };
 		C6B0BE602BBCAC86003E3266 /* BreedsAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B0BE5F2BBCAC86003E3266 /* BreedsAction.swift */; };
 		C6B0BE622BBCACB3003E3266 /* BreedsEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B0BE612BBCACB3003E3266 /* BreedsEnvironment.swift */; };
@@ -68,6 +69,7 @@
 		C6974ED62BC0815500090DF5 /* BreedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedViewModel.swift; sourceTree = "<group>"; };
 		C6974ED82BC0845200090DF5 /* BreedsNetworkEntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedsNetworkEntityMapper.swift; sourceTree = "<group>"; };
 		C6974EDA2BC0857600090DF5 /* BreedModelMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedModelMapper.swift; sourceTree = "<group>"; };
+		C6974EDC2BC08CB500090DF5 /* DogEntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogEntityMapper.swift; sourceTree = "<group>"; };
 		C6B0BE5D2BBCAC6B003E3266 /* BreedsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedsState.swift; sourceTree = "<group>"; };
 		C6B0BE5F2BBCAC86003E3266 /* BreedsAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedsAction.swift; sourceTree = "<group>"; };
 		C6B0BE612BBCACB3003E3266 /* BreedsEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedsEnvironment.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			children = (
 				C6B551072BB9F2340059C53C /* BreedsRepo.swift */,
 				C6B0BE802BBCBAA7003E3266 /* BreedsRepoStub.swift */,
+				C6974ED82BC0845200090DF5 /* BreedsNetworkEntityMapper.swift */,
 				C6B551222BBB3E0C0059C53C /* Service */,
 			);
 			path = Data;
@@ -218,6 +221,7 @@
 			children = (
 				C6B551092BB9F3820059C53C /* DogsRepo.swift */,
 				C6B0BE842BBCBEA1003E3266 /* DogsRepoStub.swift */,
+				C6974EDC2BC08CB500090DF5 /* DogEntityMapper.swift */,
 				C6B551212BBB3DFB0059C53C /* Service */,
 			);
 			path = Data;
@@ -268,7 +272,6 @@
 			children = (
 				C6B551102BBB30630059C53C /* BreedsNetworkService.swift */,
 				C6B551142BBB377E0059C53C /* BreedsNetworkEntity.swift */,
-				C6974ED82BC0845200090DF5 /* BreedsNetworkEntityMapper.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 				C6B551152BBB377E0059C53C /* BreedsNetworkEntity.swift in Sources */,
 				C6B0BE682BBCB0F5003E3266 /* View+Extension.swift in Sources */,
 				C6B0BE832BBCBB9D003E3266 /* BreedsRoterStub.swift in Sources */,
+				C6974EDD2BC08CB500090DF5 /* DogEntityMapper.swift in Sources */,
 				C6B0BE882BBCC076003E3266 /* DogsRouterStub.swift in Sources */,
 				C6BAB1852BB0881900F158C6 /* DogsListView.swift in Sources */,
 				C6B0BE7F2BBCB59F003E3266 /* FavoritesRouterView.swift in Sources */,
