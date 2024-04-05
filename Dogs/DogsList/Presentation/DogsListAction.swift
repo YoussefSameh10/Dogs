@@ -12,4 +12,5 @@ enum DogsListAction {
     case loaded(dogs: [DogModel], favoriteDogs: [DogModel])
     case tapDog(DogModel)
     case tapFavorites(DogModel)
+    case onDisappear
 }

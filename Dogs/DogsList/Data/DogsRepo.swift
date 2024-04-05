@@ -10,6 +10,7 @@ import SwiftData
 
 protocol DogsNetworkService: Sendable {
     func fetchDogs(breed: BreedModel) async throws -> [DogModel]
+    func cancelFetch() async
 }
 
 protocol DogsDatabaseService: Sendable {
@@ -32,6 +33,10 @@ struct DogsRepoImpl: DogsRepo {
     
     func fetchDogs(breed: BreedModel) async throws -> [DogModel] {
         try await network.fetchDogs(breed: breed).sorted { $0.id < $1.id }
+    }
+    
+    func cancelFetch() async {
+        await network.cancelFetch()
     }
     
     func addToFavorites(dog: DogModel) async {

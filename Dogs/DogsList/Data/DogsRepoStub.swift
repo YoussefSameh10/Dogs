@@ -33,6 +33,8 @@ struct DogsRepoStub: DogsRepo {
         dogs
     }
     
+    func cancelFetch() async { }
+    
     func addToFavorites(dog: DogModel) { }
     
     func removeFromFavorites(dog: DogModel) { }

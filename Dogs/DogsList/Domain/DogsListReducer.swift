@@ -34,6 +34,9 @@ struct DogsListReducer {
             newState.favoriteDogs.append(dog)
             await environment.addToFavorites(dog: dog)
             return newState
+        case .onDisappear:
+            await environment.cancelFetch()
+            return newState
         }
     }
 }
