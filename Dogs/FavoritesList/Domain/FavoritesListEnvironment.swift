@@ -5,8 +5,6 @@
 //  Created by Youssef Ghattas on 02/04/2024.
 //
 
-import Foundation
-
 protocol FavoritesRepo: Sendable {
     func addToFavorites(dog: DogModel) async
     func removeFromFavorites(dog: DogModel) async

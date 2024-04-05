@@ -5,8 +5,6 @@
 //  Created by Youssef Ghattas on 02/04/2024.
 //
 
-import Foundation
-
 struct BreedsState {
     var breeds = [String: [BreedModel]]() {
         didSet {

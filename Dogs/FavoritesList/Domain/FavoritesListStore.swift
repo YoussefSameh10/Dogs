@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import SwiftData
-import Combine
 
 @MainActor
 @Observable class FavoritesListStore {

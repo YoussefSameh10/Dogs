@@ -5,8 +5,6 @@
 //  Created by Youssef Ghattas on 29/03/2024.
 //
 
-import Foundation
-
 extension FavoritesRouterImpl {
     enum Screen: Hashable {
         case favoritesList

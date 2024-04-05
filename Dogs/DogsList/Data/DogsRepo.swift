@@ -5,9 +5,6 @@
 //  Created by Youssef Ghattas on 31/03/2024.
 //
 
-import Foundation
-import SwiftData
-
 protocol DogsNetworkService: Sendable {
     func fetchDogs(breed: BreedModel) async throws -> [DogModel]
     func cancelFetch() async

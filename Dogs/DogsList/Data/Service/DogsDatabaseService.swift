@@ -5,7 +5,6 @@
 //  Created by Youssef Ghattas on 01/04/2024.
 //
 
-import Foundation
 import SwiftData
 
 @ModelActor

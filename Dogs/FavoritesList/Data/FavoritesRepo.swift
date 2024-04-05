@@ -5,9 +5,6 @@
 //  Created by Youssef Ghattas on 31/03/2024.
 //
 
-import Foundation
-import SwiftData
-
 struct FavoritesRepoImpl: FavoritesRepo {
     private let database: DogsDatabaseService?
     

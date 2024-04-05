@@ -6,9 +6,6 @@
 //
 
 import Foundation
-import UIKit
-import SwiftData
-import Combine
 
 @MainActor
 @Observable final class DogsListStore {
@@ -33,9 +30,5 @@ import Combine
                 print(error.localizedDescription)
             }
         }
-    }
-    
-    func isFavorite(dog: DogModel) -> Bool {
-        return state.favoriteDogs.contains(where: { $0 == dog })
     }
 }
