@@ -34,20 +34,6 @@
                   endingLineNumber = "42">
                </Location>
                <Location
-                  uuid = "A5940E67-E5E9-47FA-A1A0-971FB037F18A - be515cd65be7e625"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for Dogs.DogsRepoImpl.addToFavorites(dog: Dogs.DogModel) async -&gt; ()"
-                  moduleName = "Dogs"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yg0123/Desktop/Others/Self%20Development/iOS/Trials/Dogs/Dogs/DogsList/Data/DogsRepo.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "42"
-                  endingLineNumber = "42">
-               </Location>
-               <Location
                   uuid = "A5940E67-E5E9-47FA-A1A0-971FB037F18A - 323e7d37d7726809"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
@@ -67,16 +53,184 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "745B5FFA-C75B-4CF4-8D86-7C7A592A50F0"
+            uuid = "6124068C-92B7-48E6-9008-30120B896435"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Dogs/DogsList/Data/Service/DogsDatabaseService.swift"
+            filePath = "Dogs/DogDetails/Domain/DogDetailsReducer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "addToFavorites(dog:)"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "reduce(_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EB4C0254-C599-4519-A9B2-183BB4DC2702"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dogs/DogDetails/Domain/DogDetailsReducer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "reduce(_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4970A477-72F7-4AB1-8112-851AFB70FC08"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dogs/DogDetails/Domain/DogDetailsReducer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "reduce(_:_:_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4970A477-72F7-4AB1-8112-851AFB70FC08 - edd9e8959b700428"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Dogs.DogDetailsReducer.reduce(Dogs.DogDetailsState, Dogs.DogDetailsAction, Dogs.DogDetailsEnvironment) async -&gt; Dogs.DogDetailsState"
+                  moduleName = "Dogs"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yg0123/Desktop/Others/Self%20Development/iOS/Trials/Dogs/Dogs/DogDetails/Domain/DogDetailsReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27">
+               </Location>
+               <Location
+                  uuid = "4970A477-72F7-4AB1-8112-851AFB70FC08 - 1ed188863886ee0b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(6) await resume partial function for Dogs.DogDetailsReducer.reduce(Dogs.DogDetailsState, Dogs.DogDetailsAction, Dogs.DogDetailsEnvironment) async -&gt; Dogs.DogDetailsState"
+                  moduleName = "Dogs"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yg0123/Desktop/Others/Self%20Development/iOS/Trials/Dogs/Dogs/DogDetails/Domain/DogDetailsReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27">
+               </Location>
+               <Location
+                  uuid = "4970A477-72F7-4AB1-8112-851AFB70FC08 - 35b673c635a59822"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(7) suspend resume partial function for Dogs.DogDetailsReducer.reduce(Dogs.DogDetailsState, Dogs.DogDetailsAction, Dogs.DogDetailsEnvironment) async -&gt; Dogs.DogDetailsState"
+                  moduleName = "Dogs"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yg0123/Desktop/Others/Self%20Development/iOS/Trials/Dogs/Dogs/DogDetails/Domain/DogDetailsReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "02B059D7-DF47-4BE5-BB9F-9B61962883E2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dogs/DogDetails/Domain/DogDetailsReducer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "reduce(_:_:_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "02B059D7-DF47-4BE5-BB9F-9B61962883E2 - edd9e8959b7006e6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Dogs.DogDetailsReducer.reduce(Dogs.DogDetailsState, Dogs.DogDetailsAction, Dogs.DogDetailsEnvironment) async -&gt; Dogs.DogDetailsState"
+                  moduleName = "Dogs"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yg0123/Desktop/Others/Self%20Development/iOS/Trials/Dogs/Dogs/DogDetails/Domain/DogDetailsReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13">
+               </Location>
+               <Location
+                  uuid = "02B059D7-DF47-4BE5-BB9F-9B61962883E2 - 6622fb6e16d464c1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for Dogs.DogDetailsReducer.reduce(Dogs.DogDetailsState, Dogs.DogDetailsAction, Dogs.DogDetailsEnvironment) async -&gt; Dogs.DogDetailsState"
+                  moduleName = "Dogs"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yg0123/Desktop/Others/Self%20Development/iOS/Trials/Dogs/Dogs/DogDetails/Domain/DogDetailsReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13">
+               </Location>
+               <Location
+                  uuid = "02B059D7-DF47-4BE5-BB9F-9B61962883E2 - a5ac9e52416b62e8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Dogs.DogDetailsReducer.reduce(Dogs.DogDetailsState, Dogs.DogDetailsAction, Dogs.DogDetailsEnvironment) async -&gt; Dogs.DogDetailsState"
+                  moduleName = "Dogs"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yg0123/Desktop/Others/Self%20Development/iOS/Trials/Dogs/Dogs/DogDetails/Domain/DogDetailsReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BB9B96CC-BE24-40AB-9C30-CBB246351888"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dogs/DogDetails/Domain/DogDetailsReducer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "reduce(_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "97E2BCF4-F37D-40EC-A574-7A06CACAFA8D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dogs/DogDetails/Domain/DogDetailsReducer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "reduce(_:_:_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
