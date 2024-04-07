@@ -22,7 +22,7 @@ struct DogsListView: View {
                     ForEach(store.state.dogs.map { $0.toDogViewModel }) { dog in
                         DogView(
                             dog: dog,
-                            isFavorite: store.state.isFavorite(dog: dog.toDogModel),
+                            isFavorite: dog.isFavorite,
                             onTapDog: {
                                 store.send(.tapDog(dog.toDogModel))
                             },
@@ -46,7 +46,7 @@ struct DogsListView: View {
 #Preview {
     DogsListView(
         store: DogsListStore(
-            breed: BreedModel(name: "Husky"),
+            breed: BreedViewModel(name: "Husky"),
             environment: DogsListEnvironment(
                 repo: DogsRepoStub(),
                 router: DogsRouterStub()

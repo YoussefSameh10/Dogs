@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		C679F10D2BB5E86800FB1380 /* FavoritesListStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C679F10C2BB5E86800FB1380 /* FavoritesListStore.swift */; };
+		C67D5B942BC3098600C9F8E0 /* DogDetailsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D5B932BC3098600C9F8E0 /* DogDetailsStore.swift */; };
+		C67D5B962BC309B900C9F8E0 /* DogDetailsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D5B952BC309B900C9F8E0 /* DogDetailsState.swift */; };
+		C67D5B982BC30AD400C9F8E0 /* DogDetailsAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D5B972BC30AD400C9F8E0 /* DogDetailsAction.swift */; };
+		C67D5B9A2BC30B9D00C9F8E0 /* DogDetailsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D5B992BC30B9D00C9F8E0 /* DogDetailsReducer.swift */; };
+		C67D5B9C2BC30BC500C9F8E0 /* DogDetailsEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D5B9B2BC30BC500C9F8E0 /* DogDetailsEnvironment.swift */; };
 		C6974ED12BC0732800090DF5 /* DogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6974ED02BC0732800090DF5 /* DogModel.swift */; };
 		C6974ED32BC07B4200090DF5 /* BreedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6974ED22BC07B4200090DF5 /* BreedModel.swift */; };
 		C6974ED52BC07BDF00090DF5 /* DogsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6974ED42BC07BDF00090DF5 /* DogsResponse.swift */; };
@@ -65,6 +70,11 @@
 
 /* Begin PBXFileReference section */
 		C679F10C2BB5E86800FB1380 /* FavoritesListStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListStore.swift; sourceTree = "<group>"; };
+		C67D5B932BC3098600C9F8E0 /* DogDetailsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogDetailsStore.swift; sourceTree = "<group>"; };
+		C67D5B952BC309B900C9F8E0 /* DogDetailsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogDetailsState.swift; sourceTree = "<group>"; };
+		C67D5B972BC30AD400C9F8E0 /* DogDetailsAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogDetailsAction.swift; sourceTree = "<group>"; };
+		C67D5B992BC30B9D00C9F8E0 /* DogDetailsReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogDetailsReducer.swift; sourceTree = "<group>"; };
+		C67D5B9B2BC30BC500C9F8E0 /* DogDetailsEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogDetailsEnvironment.swift; sourceTree = "<group>"; };
 		C6974ED02BC0732800090DF5 /* DogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogModel.swift; sourceTree = "<group>"; };
 		C6974ED22BC07B4200090DF5 /* BreedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedModel.swift; sourceTree = "<group>"; };
 		C6974ED42BC07BDF00090DF5 /* DogsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogsResponse.swift; sourceTree = "<group>"; };
@@ -132,6 +142,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C67D5B902BC3094C00C9F8E0 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				C6EB33132BB71A6500EB74D0 /* DogDetailsView.swift */,
+				C67D5B932BC3098600C9F8E0 /* DogDetailsStore.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		C67D5B912BC3095600C9F8E0 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				C67D5B952BC309B900C9F8E0 /* DogDetailsState.swift */,
+				C67D5B972BC30AD400C9F8E0 /* DogDetailsAction.swift */,
+				C67D5B992BC30B9D00C9F8E0 /* DogDetailsReducer.swift */,
+				C67D5B9B2BC30BC500C9F8E0 /* DogDetailsEnvironment.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		C67D5B922BC3096500C9F8E0 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		C6974EE22BC0AB7100090DF5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -406,7 +443,9 @@
 		C6EB33122BB71A1D00EB74D0 /* DogDetails */ = {
 			isa = PBXGroup;
 			children = (
-				C6EB33132BB71A6500EB74D0 /* DogDetailsView.swift */,
+				C67D5B902BC3094C00C9F8E0 /* Presentation */,
+				C67D5B912BC3095600C9F8E0 /* Domain */,
+				C67D5B922BC3096500C9F8E0 /* Data */,
 			);
 			path = DogDetails;
 			sourceTree = "<group>";
@@ -508,8 +547,10 @@
 				C6BAB17E2BB0757000F158C6 /* FavoritesListView.swift in Sources */,
 				C6B551172BBB37880059C53C /* DogEntity.swift in Sources */,
 				C6B0BE8A2BBCC104003E3266 /* FavoritesRouterStub.swift in Sources */,
+				C67D5B962BC309B900C9F8E0 /* DogDetailsState.swift in Sources */,
 				C6B0BE712BBCB31D003E3266 /* DogsListAction.swift in Sources */,
 				C6B0BE6F2BBCB310003E3266 /* DogsListState.swift in Sources */,
+				C67D5B9C2BC30BC500C9F8E0 /* DogDetailsEnvironment.swift in Sources */,
 				C6BAB1892BB17D9D00F158C6 /* BreedsStore.swift in Sources */,
 				C6974ED12BC0732800090DF5 /* DogModel.swift in Sources */,
 				C6EB33192BB7275C00EB74D0 /* FavoritesScreens.swift in Sources */,
@@ -524,6 +565,7 @@
 				C6B0BE682BBCB0F5003E3266 /* View+Extension.swift in Sources */,
 				C6B0BE832BBCBB9D003E3266 /* BreedsRoterStub.swift in Sources */,
 				C6974EDD2BC08CB500090DF5 /* DogDataMappers.swift in Sources */,
+				C67D5B982BC30AD400C9F8E0 /* DogDetailsAction.swift in Sources */,
 				C6974EDF2BC09BF400090DF5 /* DogViewModel.swift in Sources */,
 				C6B0BE882BBCC076003E3266 /* DogsRouterStub.swift in Sources */,
 				C6BAB1852BB0881900F158C6 /* DogsListView.swift in Sources */,
@@ -537,6 +579,7 @@
 				C6974EE12BC09C5700090DF5 /* DogPresentationMappers.swift in Sources */,
 				C6B0BE752BBCB33A003E3266 /* DogsListEnvironment.swift in Sources */,
 				C6B0BE5E2BBCAC6B003E3266 /* BreedsState.swift in Sources */,
+				C67D5B9A2BC30B9D00C9F8E0 /* DogDetailsReducer.swift in Sources */,
 				C6BAB17B2BB0750B00F158C6 /* BreedsListView.swift in Sources */,
 				C679F10D2BB5E86800FB1380 /* FavoritesListStore.swift in Sources */,
 				C6B0BE7B2BBCB4CD003E3266 /* FavoritesListReducer.swift in Sources */,
@@ -551,6 +594,7 @@
 				C6974ED32BC07B4200090DF5 /* BreedModel.swift in Sources */,
 				C6BAB16A2BB074BB00F158C6 /* DogsApp.swift in Sources */,
 				C6974ED72BC0815500090DF5 /* BreedViewModel.swift in Sources */,
+				C67D5B942BC3098600C9F8E0 /* DogDetailsStore.swift in Sources */,
 				C6EB33142BB71A6500EB74D0 /* DogDetailsView.swift in Sources */,
 				C6B0BE732BBCB32D003E3266 /* DogsListReducer.swift in Sources */,
 				C6BAB1822BB0867E00F158C6 /* BreedsRouter.swift in Sources */,

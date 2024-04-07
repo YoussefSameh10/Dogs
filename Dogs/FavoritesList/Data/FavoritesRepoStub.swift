@@ -12,8 +12,8 @@ struct FavoritesRepoStub: FavoritesRepo {
     var favoriteDogs: [DogModel] {
         guard let data = UIImage(systemName: "dog")?.pngData() else { return [] }
         return [
-            DogModel(id: "3", breed: breed, data: data),
-            DogModel(id: "5", breed: breed, data: data)
+            DogModel(id: "3", breed: breed, data: data, isFavorite: true),
+            DogModel(id: "5", breed: breed, data: data, isFavorite: true)
         ]
     }
     

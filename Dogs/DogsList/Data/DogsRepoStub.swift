@@ -12,19 +12,11 @@ struct DogsRepoStub: DogsRepo {
     var dogs: [DogModel] {
         guard let data = UIImage(systemName: "dog.fill")?.pngData() else { return [] }
         return [
-            DogModel(id: "1", breed: breed, data: data),
-            DogModel(id: "2", breed: breed, data: data),
-            DogModel(id: "3", breed: breed, data: data),
-            DogModel(id: "4", breed: breed, data: data),
-            DogModel(id: "5", breed: breed, data: data)
-        ]
-    }
-    
-    var favoriteDogs: [DogModel] {
-        guard let data = UIImage(systemName: "dog")?.pngData() else { return [] }
-        return [
-            DogModel(id: "3", breed: breed, data: data),
-            DogModel(id: "5", breed: breed, data: data)
+            DogModel(id: "1", breed: breed, data: data, isFavorite: false),
+            DogModel(id: "2", breed: breed, data: data, isFavorite: false),
+            DogModel(id: "3", breed: breed, data: data, isFavorite: true),
+            DogModel(id: "4", breed: breed, data: data, isFavorite: false),
+            DogModel(id: "5", breed: breed, data: data, isFavorite: true)
         ]
     }
     
@@ -39,6 +31,6 @@ struct DogsRepoStub: DogsRepo {
     func removeFromFavorites(dog: DogModel) { }
     
     func getFavoriteDogs() -> [DogModel] {
-        favoriteDogs
+        dogs.filter { $0.isFavorite }
     }
 }

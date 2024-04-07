@@ -10,13 +10,13 @@ import UIKit
 extension DogModel {
     var toDogViewModel: DogViewModel {
         let image = UIImage(data: self.data)!
-        return DogViewModel(id: self.id, breed: self.breed.toBreedViewModel, image: image)
+        return DogViewModel(id: self.id, breed: self.breed.toBreedViewModel, image: image, isFavorite: self.isFavorite)
     }
 }
 
 extension DogViewModel {
     var toDogModel: DogModel {
         let data = self.image.pngData()!
-        return DogModel(id: self.id, breed: self.breed.toBreedModel, data: data)
+        return DogModel(id: self.id, breed: self.breed.toBreedModel, data: data, isFavorite: self.isFavorite)
     }
 }

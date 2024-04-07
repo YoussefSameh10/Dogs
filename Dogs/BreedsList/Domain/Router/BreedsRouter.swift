@@ -38,12 +38,14 @@ class BreedsRouterImpl: BreedsRouter {
     private func pushDogsListView(breed: BreedModel) -> AnyView {
         let environment = DogsListEnvironment(router: self)
         
-        let store = DogsListStore(breed: breed, environment: environment)
+        let store = DogsListStore(breed: breed.toBreedViewModel, environment: environment)
         return DogsListView(store: store).toAnyView
     }
     
     private func pushDogDetailsView(dog: DogModel) -> AnyView {
-        return DogDetailsView(dog: dog.toDogViewModel).toAnyView
+        let environment = DogDetailsEnvironment()
+        let store = DogDetailsStore(dog: dog.toDogViewModel, environment: environment)
+        return DogDetailsView(store: store).toAnyView
     }
 }
 

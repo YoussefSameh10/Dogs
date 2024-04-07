@@ -11,25 +11,29 @@ struct DogsListReducer {
         switch action {
         case .onAppear:
             newState.isLoading = true
-            let dogs = try await environment.fetchDogs(breed: state.breed)
+            var dogs = try await environment.fetchDogs(breed: state.breed)
             let favoriteDogs = await environment.getFavoriteDogs()
-            return try await reduce(newState, .loaded(dogs: dogs, favoriteDogs: favoriteDogs), environment)
-        case .loaded(let dogs, let favoriteDogs):
+            
+            for i in dogs.indices {
+                dogs[i].isFavorite = favoriteDogs.contains(where: { $0 == dogs[i] })
+            }
+            
+            return try await reduce(newState, .loaded(dogs: dogs), environment)
+        case .loaded(let dogs):
             newState.dogs = dogs.sorted(by: { $0.id < $1.id })
-            newState.favoriteDogs = favoriteDogs.sorted(by: { $0.id < $1.id })
             newState.isLoading = false
             return newState
         case .tapDog(let dog):
             await environment.goNext(dog: dog)
             return newState
         case .tapFavorites(let dog):
-            if newState.favoriteDogs.contains(where: { $0 == dog }) {
-                newState.favoriteDogs.removeAll(where: { $0 == dog })
+            guard let index = newState.dogs.firstIndex(where: { $0 == dog }) else { return newState }
+            if dog.isFavorite {
+                newState.dogs[index].isFavorite = false
                 await environment.removeFromFavorites(dog: dog)
-                
                 return newState
             }
-            newState.favoriteDogs.append(dog)
+            newState.dogs[index].isFavorite = true
             await environment.addToFavorites(dog: dog)
             return newState
         case .onDisappear:

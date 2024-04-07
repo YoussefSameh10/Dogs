@@ -33,7 +33,9 @@ class FavoritesRouterImpl: FavoritesRouter {
     }
     
     private func pushDogDetailsView(dog: DogModel) -> AnyView {
-        return DogDetailsView(dog: dog.toDogViewModel).toAnyView
+        let environment = DogDetailsEnvironment()
+        let store = DogDetailsStore(dog: dog.toDogViewModel, environment: environment)
+        return DogDetailsView(store: store).toAnyView
     }
 }
 
