@@ -13,8 +13,8 @@ import Foundation
     private let reducer: DogDetailsReducer
     private let environment: DogDetailsEnvironment
     
-    init(dog: DogModel, reducer: DogDetailsReducer = DogDetailsReducer(), environment: DogDetailsEnvironment) {
-        self.state = DogDetailsState(dog: dog)
+    init(dog: DogViewModel, reducer: DogDetailsReducer = DogDetailsReducer(), environment: DogDetailsEnvironment) {
+        self.state = DogDetailsState(dog: dog.toDogModel)
         self.reducer = reducer
         self.environment = environment
     }

@@ -8,22 +8,14 @@
 struct DogDetailsReducer {
     func reduce(_ state: DogDetailsState, _ action: DogDetailsAction, _ environment: DogDetailsEnvironment) async -> DogDetailsState {
         var newState = state
-        switch action {
-        case .onAppear:
-            let favoriteDogs = await environment.getFavorites()
-            if favoriteDogs.contains(where: { $0 == newState.dog }) {
-                newState.isFavorite = true
-            } else {
-                newState.isFavorite = false
-            }
-            return newState
+        switch action {            
         case .tapFavorite:
-            if newState.isFavorite {
-                newState.isFavorite = false
+            if newState.dog.isFavorite {
+                newState.dog.isFavorite = false
                 await environment.removeFromFavorites(dog: newState.dog)
                 return newState
             }
-            newState.isFavorite = true
+            newState.dog.isFavorite = true
             await environment.addToFavorites(dog: newState.dog)
             return newState
         }

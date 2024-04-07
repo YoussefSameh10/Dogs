@@ -8,6 +8,5 @@
 import Foundation
 
 struct DogDetailsState {
-    let dog: DogModel
-    var isFavorite: Bool = false
+    var dog: DogModel
 }

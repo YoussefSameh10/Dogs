@@ -38,9 +38,6 @@ struct DogDetailsView: View {
             }
         }
         .navigationTitle(dog.breed.name.capitalized)
-        .task {
-            store.send(.onAppear)
-        }
     }
     
     private var magnifyGesture: some Gesture {
@@ -56,7 +53,7 @@ struct DogDetailsView: View {
     
     @MainActor
     private var favoriteImageName: String {
-        if store.state.isFavorite {
+        if dog.isFavorite {
             "heart.fill"
         } else {
             "heart"
@@ -65,7 +62,7 @@ struct DogDetailsView: View {
     
     @MainActor
     private var favoriteImageColor: Color {
-        if store.state.isFavorite {
+        if dog.isFavorite {
             Color.red
         } else {
             Color.black
@@ -73,3 +70,13 @@ struct DogDetailsView: View {
     }
 }
 
+#Preview {
+    let repo = FavoritesRepoStub()
+    let dog = repo.favoriteDogs.first!.toDogViewModel
+    return DogDetailsView(
+        store: DogDetailsStore(
+            dog: dog,
+            environment: DogDetailsEnvironment(repo: repo)
+        )
+    )
+}

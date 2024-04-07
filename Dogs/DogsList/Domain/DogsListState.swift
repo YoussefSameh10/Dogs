@@ -8,10 +8,5 @@
 struct DogsListState {
     let breed: BreedModel
     var dogs = [DogModel]()
-    var favoriteDogs = [DogModel]()
     var isLoading = true
-    
-    func isFavorite(dog: DogModel) -> Bool {
-        return favoriteDogs.contains(where: { $0 == dog })
-    }
 }

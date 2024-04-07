@@ -10,13 +10,13 @@ import Foundation
 @MainActor
 @Observable final class DogsListStore {
     var state: DogsListState
-    private let breed: BreedModel
+    private let breed: BreedViewModel
     private let reducer: DogsListReducer
     private let environment: DogsListEnvironment
     
-    init(breed: BreedModel, reducer: DogsListReducer = DogsListReducer(), environment: DogsListEnvironment) {
+    init(breed: BreedViewModel, reducer: DogsListReducer = DogsListReducer(), environment: DogsListEnvironment) {
         self.breed = breed
-        self.state = DogsListState(breed: breed)
+        self.state = DogsListState(breed: breed.toBreedModel)
         
         self.reducer = reducer
         self.environment = environment        

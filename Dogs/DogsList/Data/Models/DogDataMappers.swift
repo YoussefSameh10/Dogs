@@ -9,13 +9,13 @@ import Foundation
 
 extension DogNetworkEntity {
     func toDogModel(with breed: String) -> DogModel {
-        DogModel(id: self.id, breed: BreedModel(name: breed), data: data)
+        DogModel(id: self.id, breed: BreedModel(name: breed), data: data, isFavorite: false)
     }
 }
 
 extension DogEntity {
     var toDogModel: DogModel {
-        DogModel(id: self.id, breed: BreedModel(name: self.breed), data: self.data)
+        DogModel(id: self.id, breed: BreedModel(name: self.breed), data: self.data, isFavorite: true)
     }
 }
 

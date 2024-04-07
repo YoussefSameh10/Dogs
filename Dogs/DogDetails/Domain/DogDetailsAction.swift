@@ -6,6 +6,5 @@
 //
 
 enum DogDetailsAction {
-    case onAppear
     case tapFavorite
 }
