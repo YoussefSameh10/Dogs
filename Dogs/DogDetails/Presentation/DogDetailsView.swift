@@ -13,14 +13,14 @@ struct DogDetailsView: View {
     
     var body: some View {
         ScrollView {
-            VStack() {
+            VStack(spacing: 32) {
                 Image(uiImage: dog.image)
                     .resizable()
                     .scaledToFit()
                     .scaleEffect(scale)
                     .gesture(magnifyGesture)
                 
-                HStack {
+                HStack(spacing: 16) {
                     Button {
                         store.send(.tapFavorite)
                     } label: {
@@ -31,13 +31,26 @@ struct DogDetailsView: View {
                             .padding(8)                        
                     }
                     
+                    Button {
+                        store.send(.tapShare)
+                    } label: {
+                        Image(systemName: "arrow.down")
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .padding(8)
+                    }
+                    
                     Spacer()
                 }
-                .padding(16)
+                .padding(.horizontal, 16)
                 Spacer()
             }
         }
+        .tint(Color.black)
         .navigationTitle(dog.breed.name.capitalized)
+        .sheet(isPresented: $store.state.isSharing) {
+            ShareSheet(activityItems: [store.state.dog.toDogViewModel.image])
+        }
     }
     
     private var magnifyGesture: some Gesture {

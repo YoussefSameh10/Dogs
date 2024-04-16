@@ -9,4 +9,5 @@ import Foundation
 
 struct DogDetailsState {
     var dog: DogModel
+    var isSharing = false
 }
