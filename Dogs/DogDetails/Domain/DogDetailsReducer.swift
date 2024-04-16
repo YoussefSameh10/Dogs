@@ -18,6 +18,9 @@ struct DogDetailsReducer {
             newState.dog.isFavorite = true
             await environment.addToFavorites(dog: newState.dog)
             return newState
+        case .tapShare:
+            newState.isSharing = true
+            return newState
         }
     }
 }

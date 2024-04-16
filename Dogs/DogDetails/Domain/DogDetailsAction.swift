@@ -7,4 +7,5 @@
 
 enum DogDetailsAction {
     case tapFavorite
+    case tapShare
 }
