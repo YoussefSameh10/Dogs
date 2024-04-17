@@ -20,7 +20,7 @@ struct FavoritesRepoImpl: FavoritesRepo {
         await database?.removeFromFavorites(dog: dog)
     }
     
-    func getFavoriteDogs() async -> [DogModel] {
-        await database?.getFavoriteDogs() ?? []
+    func getFavoriteDogs(breed: BreedModel?) async -> [DogModel] {
+        await database?.getFavoriteDogs(breed: breed) ?? []
     }
 }

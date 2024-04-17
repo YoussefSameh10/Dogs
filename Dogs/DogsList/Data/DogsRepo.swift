@@ -13,24 +13,34 @@ protocol DogsNetworkService: Sendable {
 protocol DogsDatabaseService: Sendable {
     func addToFavorites(dog: DogModel) async
     func removeFromFavorites(dog: DogModel) async
-    func getFavoriteDogs() async -> [DogModel]
+    func getFavoriteDogs(breed: BreedModel?) async -> [DogModel]
+}
+
+protocol NetworkMonitor: Sendable {
+    var isConnected: Bool { get }
 }
 
 struct DogsRepoImpl: DogsRepo {
     private let network: DogsNetworkService
     private let database: DogsDatabaseService?
+    private let networkMonitor: NetworkMonitor
     
     init(
         network: DogsNetworkService = DogsNetworkServiceImpl(),
-        database: DogsDatabaseService? = DogsDatabaseServiceImpl()
+        database: DogsDatabaseService? = DogsDatabaseServiceImpl(),
+        networkMonitor: NetworkMonitor = NetworkMonitorImpl()
     ) {
         self.network = network
         self.database = database
+        self.networkMonitor = networkMonitor
     }
     
     func fetchDogs(breed: BreedModel) async throws -> [DogModel] {
-        try await network.fetchDogs(breed: breed.name)
-            .map { $0.toDogModel(with: breed.name) }
+        if networkMonitor.isConnected {
+            return try await network.fetchDogs(breed: breed.name)
+                .map { $0.toDogModel(with: breed.name) }
+        }
+        return await getFavoriteDogs(breed: breed)
     }
     
     func cancelFetch() async {
@@ -45,7 +55,7 @@ struct DogsRepoImpl: DogsRepo {
         await database?.removeFromFavorites(dog: dog)
     }
     
-    func getFavoriteDogs() async -> [DogModel] {
-        await database?.getFavoriteDogs() ?? []
+    func getFavoriteDogs(breed: BreedModel) async -> [DogModel] {
+        await database?.getFavoriteDogs(breed: breed) ?? []
     }
 }

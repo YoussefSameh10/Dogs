@@ -31,9 +31,9 @@ struct FavoritesListView: View {
                         )
                     }
                 }
-                .navigationTitle("Favorites")
             }
         }
+        .navigationTitle("Favorites")
         .frame(maxWidth: .infinity)
         .background(content: { Color.gray.opacity(0.2) })
         .onAppear {
