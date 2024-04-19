@@ -18,7 +18,7 @@ struct DogsListView: View {
                     .progressViewStyle(CircularProgressViewStyle())
             } else if store.state.dogs.isEmpty {
                 Spacer(minLength: UIScreen.main.bounds.height/3)
-                Text("No dogs in your favorites list.")
+                Text("No dogs in this breed.")
                     .font(.title)
             } else {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: UIScreen.main.bounds.width/2 - 4))], spacing: 8) {
@@ -33,9 +33,9 @@ struct DogsListView: View {
                         )
                     }
                 }
-                .navigationTitle(store.state.breed.toBreedViewModel.name.capitalized)
             }
         }
+        .navigationTitle(store.state.breed.toBreedViewModel.name.capitalized)
         .frame(maxWidth: .infinity)
         .background(content: { Color.gray.opacity(0.2) })
         .task {

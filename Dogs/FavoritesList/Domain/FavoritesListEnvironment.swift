@@ -8,7 +8,7 @@
 protocol FavoritesRepo: Sendable {
     func addToFavorites(dog: DogModel) async
     func removeFromFavorites(dog: DogModel) async
-    func getFavoriteDogs() async -> [DogModel]
+    func getFavoriteDogs(breed: BreedModel?) async -> [DogModel]
 }
 
 protocol FavoritesRouterDelegate: Sendable{
@@ -35,8 +35,8 @@ struct FavoritesListEnvironment: Sendable {
         await repo.removeFromFavorites(dog: dog)
     }
     
-    func getFavoriteDogs() async -> [DogModel] {
-        await repo.getFavoriteDogs()
+    func getFavoriteDogs(breed: BreedModel? = nil) async -> [DogModel] {
+        await repo.getFavoriteDogs(breed: breed)
     }
     
     func goNext(dog: DogModel) async {

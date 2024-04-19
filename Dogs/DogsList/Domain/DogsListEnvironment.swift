@@ -10,7 +10,7 @@ protocol DogsRepo: Sendable {
     func cancelFetch() async
     func addToFavorites(dog: DogModel) async
     func removeFromFavorites(dog: DogModel) async
-    func getFavoriteDogs() async -> [DogModel]
+    func getFavoriteDogs(breed: BreedModel) async -> [DogModel]
 }
 
 protocol DogsRouterDelegate: Sendable {
@@ -45,8 +45,8 @@ struct DogsListEnvironment: Sendable {
         await repo.removeFromFavorites(dog: dog)
     }
     
-    func getFavoriteDogs() async -> [DogModel] {
-        await repo.getFavoriteDogs()
+    func getFavoriteDogs(breed: BreedModel) async -> [DogModel] {
+        await repo.getFavoriteDogs(breed: breed)
     }
     
     func goNext(dog: DogModel) async {

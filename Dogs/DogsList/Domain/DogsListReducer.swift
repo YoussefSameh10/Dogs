@@ -12,7 +12,7 @@ struct DogsListReducer {
         case .onAppear:
             newState.isLoading = true
             var dogs = try await environment.fetchDogs(breed: state.breed)
-            let favoriteDogs = await environment.getFavoriteDogs()
+            let favoriteDogs = await environment.getFavoriteDogs(breed: state.breed)
             
             for i in dogs.indices {
                 dogs[i].isFavorite = favoriteDogs.contains(where: { $0 == dogs[i] })

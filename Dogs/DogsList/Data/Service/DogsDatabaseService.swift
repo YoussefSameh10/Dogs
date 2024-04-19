@@ -27,8 +27,14 @@ actor DogsDatabaseServiceImpl: DogsDatabaseService {
         modelContext.delete(dogToDelete)
     }
     
-    func getFavoriteDogs() async -> [DogModel] {
+    func getFavoriteDogs(breed: BreedModel?) async -> [DogModel] {
         let dogs = try? modelContext.fetch(FetchDescriptor<DogEntity>())
-        return dogs?.compactMap { $0.toDogModel } ?? []
+        if let breed {
+            return dogs?
+                .compactMap { $0.toDogModel }
+                .filter { $0.breed == breed } ?? []
+        }
+        return dogs?
+            .compactMap { $0.toDogModel } ?? []
     }
 }

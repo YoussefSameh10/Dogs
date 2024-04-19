@@ -30,7 +30,7 @@ struct DogsRepoStub: DogsRepo {
     
     func removeFromFavorites(dog: DogModel) { }
     
-    func getFavoriteDogs() -> [DogModel] {
+    func getFavoriteDogs(breed: BreedModel) -> [DogModel] {
         dogs.filter { $0.isFavorite }
     }
 }

@@ -19,8 +19,4 @@ struct DogDetailsEnvironment {
     func removeFromFavorites(dog: DogModel) async {
         await repo.removeFromFavorites(dog: dog)
     }
-    
-    func getFavorites() async -> [DogModel] {
-        await repo.getFavoriteDogs()
-    }
 }

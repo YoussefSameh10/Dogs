@@ -21,7 +21,7 @@ struct FavoritesRepoStub: FavoritesRepo {
     
     func removeFromFavorites(dog: DogModel) { }
     
-    func getFavoriteDogs() -> [DogModel] {
+    func getFavoriteDogs(breed: BreedModel?) -> [DogModel] {
         favoriteDogs
     }
 }
