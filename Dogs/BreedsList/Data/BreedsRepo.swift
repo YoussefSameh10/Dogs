@@ -11,13 +11,21 @@ protocol BreedsNetworkService: Sendable {
 
 struct BreedsRepoImpl: BreedsRepo {
     private let network: BreedsNetworkService
+    private let networkMonitor: NetworkMonitor
     
-    init(network: BreedsNetworkService = BreedsNetworkServiceImpl()) {
+    init(
+        network: BreedsNetworkService = BreedsNetworkServiceImpl(),
+        networkMonitor: NetworkMonitor = NetworkMonitorImpl()
+    ) {
         self.network = network
+        self.networkMonitor = networkMonitor
     }
     
     func fetchBreeds()  async throws -> [BreedModel] {
-        try await network.fetchBreeds()
-            .toBreedModels
+        if networkMonitor.isConnected {
+            return try await network.fetchBreeds()
+                .toBreedModels
+        }
+        return []
     }
 }

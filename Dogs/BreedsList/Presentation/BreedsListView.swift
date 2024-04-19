@@ -17,6 +17,9 @@ struct BreedsListView: View {
                     .progressViewStyle(CircularProgressViewStyle())
                     .frame(maxWidth: .infinity)
                     .padding(.top, 48)
+            } else if store.state.filteredBreeds.isEmpty {
+                Text("Can't find breeds.")
+                    .font(.title)
             } else {
                 List {
                     ForEach(store.state.filteredBreeds.keys.sorted(), id: \.self) { key in
