@@ -10,7 +10,8 @@ extension BreedsRouterImpl {
         case breedsList
         case dogsList(BreedModel)
         case dog(DogModel)
-        case error(BreedsError)
+        case breedsError(BreedsError)
+        case dogsError(DogsError)
         
         static func == (lhs: Screen, rhs: Screen) -> Bool {
             switch (lhs, rhs) {
@@ -26,15 +27,29 @@ extension BreedsRouterImpl {
                 true
             case (_, .dog):
                 true
-            case (.error(_), .breedsList):
+            case (.breedsError(_), .breedsList):
                 false
-            case (.error(_), .dogsList(_)):
+            case (.breedsError(_), .dogsList(_)):
                 false
-            case (.error(_), .error(_)):
+            case (.breedsError(_), .breedsError(_)):
                 true
-            case (.dogsList(_), .error(_)):
+            case (.dogsList(_), .breedsError(_)):
                 false
-            case (.breedsList, .error(_)):
+            case (.breedsList, .breedsError(_)):
+                false
+            case (.dogsError(_), .breedsList):
+                false
+            case (.dogsError(_), .dogsList(_)):
+                false
+            case (.dogsError(_), .breedsError(_)):
+                false
+            case (.dogsError(_), .dogsError(_)):
+                true
+            case (.breedsError(_), .dogsError(_)):
+                false
+            case (.dogsList(_), .dogsError(_)):
+                false
+            case (.breedsList, .dogsError(_)):
                 false
             }
         }

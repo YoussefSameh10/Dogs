@@ -7,4 +7,5 @@
 
 final class DogsRouterStub: DogsRouterDelegate {
     func goNext(dog: DogModel) { }
+    func showDogsError(_ error: DogsError) { }
 }

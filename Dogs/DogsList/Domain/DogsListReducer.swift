@@ -6,19 +6,29 @@
 //
 
 struct DogsListReducer {
-    func reduce(_ state: DogsListState, _ action: DogsListAction, _ environment: DogsListEnvironment) async throws -> DogsListState {
+    func reduce(_ state: DogsListState, _ action: DogsListAction, _ environment: DogsListEnvironment) async -> DogsListState {
         var newState = state
         switch action {
         case .onAppear:
             newState.isLoading = true
-            var dogs = try await environment.fetchDogs(breed: state.breed)
-            let favoriteDogs = await environment.getFavoriteDogs(breed: state.breed)
-            
-            for i in dogs.indices {
-                dogs[i].isFavorite = favoriteDogs.contains(where: { $0 == dogs[i] })
+            do {
+                var dogs = try await environment.fetchDogs(breed: state.breed)
+                let favoriteDogs = await environment.getFavoriteDogs(breed: state.breed)
+                
+                for i in dogs.indices {
+                    dogs[i].isFavorite = favoriteDogs.contains(where: { $0 == dogs[i] })
+                }
+                
+                return await reduce(newState, .loaded(dogs: dogs), environment)
+            } catch let error as DogsError {
+                await environment.handleError(error)
+                newState.isLoading = false
+                return newState
+            } catch {
+                await environment.handleError(DogsError.unknown)
+                newState.isLoading = false
+                return newState
             }
-            
-            return try await reduce(newState, .loaded(dogs: dogs), environment)
         case .loaded(let dogs):
             newState.dogs = dogs.sorted(by: { $0.id < $1.id })
             newState.isLoading = false

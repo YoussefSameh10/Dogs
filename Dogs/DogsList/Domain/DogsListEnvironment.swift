@@ -15,6 +15,7 @@ protocol DogsRepo: Sendable {
 
 protocol DogsRouterDelegate: Sendable {
     func goNext(dog: DogModel) async
+    func showDogsError(_ error: DogsError) async
 }
 
 struct DogsListEnvironment: Sendable {
@@ -51,5 +52,9 @@ struct DogsListEnvironment: Sendable {
     
     func goNext(dog: DogModel) async {
         await router.goNext(dog: dog)
+    }
+    
+    func handleError(_ error: DogsError) async {
+        await router.showDogsError(error)
     }
 }

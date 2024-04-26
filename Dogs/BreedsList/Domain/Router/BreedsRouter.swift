@@ -24,8 +24,10 @@ class BreedsRouterImpl: BreedsRouter {
             pushDogsListView(breed: breed)
         case .dog(let dog):
             pushDogDetailsView(dog: dog)
-        case .error(let error):
+        case .breedsError(let error):
             pushBreedsErrorView(error: error)
+        case .dogsError(let error):
+            pushDogsErrorView(error: error)
         }
     }
     
@@ -55,6 +57,10 @@ class BreedsRouterImpl: BreedsRouter {
         let store = BreedsErrorStore(error: error.toUIError, environment: environment)
         return BreedsErrorView(store: store).toAnyView
     }
+    
+    private func pushDogsErrorView(error: DogsError) -> AnyView {
+        DogsErrorView(error: error.toUIError).toAnyView
+    }
 }
 
 extension BreedsRouterImpl: BreedsRouterDelegate {
@@ -75,6 +81,13 @@ extension BreedsRouterImpl: DogsRouterDelegate {
     func goNext(dog: DogModel) async {
         await MainActor.run { [weak self] in
             self?.navPath.append(Screen.dog(dog))
+        }
+    }
+    
+    func showDogsError(_ error: DogsError) async {
+        await MainActor.run { [weak self] in
+            self?.navPath.removeLast()
+            self?.navPath.append(Screen.dogsError(error))
         }
     }
 }

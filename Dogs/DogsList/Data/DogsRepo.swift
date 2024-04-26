@@ -33,8 +33,14 @@ struct DogsRepoImpl: DogsRepo {
     
     func fetchDogs(breed: BreedModel) async throws -> [DogModel] {
         if networkMonitor.isConnected {
-            return try await network.fetchDogs(breed: breed.name)
-                .map { $0.toDogModel(with: breed.name) }
+            do {
+                return try await network.fetchDogs(breed: breed.name)
+                    .map { $0.toDogModel(with: breed.name) }
+            } catch let error as DogsNetworkError {
+                throw error.toDogsError
+            } catch {
+                throw DogsError.unknown
+            }
         }
         return await getFavoriteDogs(breed: breed)
     }
