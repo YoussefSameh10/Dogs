@@ -24,7 +24,7 @@ import Foundation
     
     func send(_ action: DogsListAction) {
         Task {
-            state = try await reducer.reduce(state, action, environment)
+            state = await reducer.reduce(state, action, environment)
         }
     }
 }
