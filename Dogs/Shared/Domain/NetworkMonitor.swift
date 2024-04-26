@@ -7,15 +7,28 @@
 
 import Network
 
+protocol NetworkMonitor: Sendable {
+    var isConnected: Bool { get }
+    var networkStates: AsyncStream<Bool> { get }
+}
+
 struct NetworkMonitorImpl: NetworkMonitor {
     private let monitor = NWPathMonitor()
     private let queue = DispatchQueue.global()
-
-    var isConnected: Bool {
-        return monitor.currentPath.status == .satisfied
-    }
-
+    
     init() {
         monitor.start(queue: queue)
+    }
+    
+    var isConnected: Bool {
+        monitor.currentPath.status == .satisfied
+    }
+    
+    var networkStates: AsyncStream<Bool> {
+        AsyncStream { cont in
+            monitor.pathUpdateHandler = { path in
+                cont.yield(path.status == .satisfied)
+            }
+        }
     }
 }

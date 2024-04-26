@@ -21,11 +21,7 @@ import Foundation
     
     func send(_ action: BreedsAction) {
         Task {
-            do {
-                state = try await reducer.reduce(state, action, environment)
-            } catch {
-                print(error.localizedDescription)
-            }
+            state = await reducer.reduce(state, action, environment)
         }
     }
 }

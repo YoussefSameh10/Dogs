@@ -16,10 +16,6 @@ protocol DogsDatabaseService: Sendable {
     func getFavoriteDogs(breed: BreedModel?) async -> [DogModel]
 }
 
-protocol NetworkMonitor: Sendable {
-    var isConnected: Bool { get }
-}
-
 struct DogsRepoImpl: DogsRepo {
     private let network: DogsNetworkService
     private let database: DogsDatabaseService?
