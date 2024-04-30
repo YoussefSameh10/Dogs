@@ -6,16 +6,26 @@
 //
 
 struct BreedsReducer {
-    func reduce(_ state: BreedsState, _ action: BreedsAction, _ environment: BreedsEnvironment) async throws -> BreedsState {
+    func reduce(_ state: BreedsState, _ action: BreedsAction, _ environment: BreedsEnvironment) async -> BreedsState {
         var newState = state
         switch action {
         case .onAppear:
-            let breeds = try await environment.fetchBreeds()
-            return try await reduce(newState, .loaded(breeds), environment)
+            do {
+                let breeds = try await environment.fetchBreeds()
+                return await reduce(newState, .loaded(breeds), environment)
+            } catch let error as BreedsError {
+                await environment.handleError(error)
+                newState.isLoading = false
+                return newState
+            } catch {
+                await environment.handleError(BreedsError.unknown)
+                newState.isLoading = false
+                return newState
+            }
         case .loaded(let breeds):
             newState.breeds = group(breeds)
             newState.isLoading = false
-            return try await reduce(newState, .search(newState.searchText), environment)
+            return await reduce(newState, .search(newState.searchText), environment)
         case .open(let breed):
             await environment.goNext(breed: breed)
             return newState

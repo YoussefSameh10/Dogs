@@ -10,21 +10,47 @@ extension BreedsRouterImpl {
         case breedsList
         case dogsList(BreedModel)
         case dog(DogModel)
+        case breedsError(BreedsError)
+        case dogsError(DogsError)
         
         static func == (lhs: Screen, rhs: Screen) -> Bool {
             switch (lhs, rhs) {
             case (.breedsList, .breedsList):
-                return true
+                true
             case let(.dogsList(lhsBreed), .dogsList(rhsBreed)):
-                return lhsBreed.name == rhsBreed.name
+                lhsBreed.name == rhsBreed.name
             case (.dogsList, .breedsList):
-                return false
+                false
             case (.breedsList, .dogsList):
-                return false
+                false
             case (.dog, _):
-                return true
+                true
             case (_, .dog):
-                return true
+                true
+            case (.breedsError(_), .breedsList):
+                false
+            case (.breedsError(_), .dogsList(_)):
+                false
+            case (.breedsError(_), .breedsError(_)):
+                true
+            case (.dogsList(_), .breedsError(_)):
+                false
+            case (.breedsList, .breedsError(_)):
+                false
+            case (.dogsError(_), .breedsList):
+                false
+            case (.dogsError(_), .dogsList(_)):
+                false
+            case (.dogsError(_), .breedsError(_)):
+                false
+            case (.dogsError(_), .dogsError(_)):
+                true
+            case (.breedsError(_), .dogsError(_)):
+                false
+            case (.dogsList(_), .dogsError(_)):
+                false
+            case (.breedsList, .dogsError(_)):
+                false
             }
         }
         

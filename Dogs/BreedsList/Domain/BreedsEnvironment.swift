@@ -12,8 +12,8 @@ protocol BreedsRepo: Sendable {
 
 protocol BreedsRouterDelegate: Sendable{
     func goNext(breed: BreedModel) async
+    func showBreedsError(_ error: BreedsError) async
 }
-
 
 struct BreedsEnvironment: Sendable {
     private let repo: BreedsRepo
@@ -33,5 +33,9 @@ struct BreedsEnvironment: Sendable {
     
     func goNext(breed: BreedModel) async {
         await router.goNext(breed: breed)
+    }
+    
+    func handleError(_ error: BreedsError) async {
+        await router.showBreedsError(error)
     }
 }

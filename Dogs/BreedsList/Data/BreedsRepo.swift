@@ -21,11 +21,17 @@ struct BreedsRepoImpl: BreedsRepo {
         self.networkMonitor = networkMonitor
     }
     
-    func fetchBreeds()  async throws -> [BreedModel] {
+    func fetchBreeds() async throws -> [BreedModel] {
         if networkMonitor.isConnected {
-            return try await network.fetchBreeds()
-                .toBreedModels
+            do {
+                return try await network.fetchBreeds()
+                    .toBreedModels
+            } catch let error as BreedsNetworkError {
+                throw error.toBreedsError
+            } catch {
+                throw BreedsError.unknown
+            }
         }
-        return []
+        throw BreedsError.network
     }
 }
