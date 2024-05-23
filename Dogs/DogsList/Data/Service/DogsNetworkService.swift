@@ -5,7 +5,7 @@
 //  Created by Youssef Ghattas on 01/04/2024.
 //
 
-import Foundation
+@preconcurrency import Foundation
 
 actor DogsNetworkServiceImpl: DogsNetworkService {
     private var task: Task<[DogNetworkEntity], Error>?

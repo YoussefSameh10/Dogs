@@ -7,20 +7,29 @@
 
 struct DogDetailsReducer {
     func reduce(_ state: DogDetailsState, _ action: DogDetailsAction, _ environment: DogDetailsEnvironment) async -> DogDetailsState {
-        var newState = state
-        switch action {            
+        switch action {
         case .tapFavorite:
-            if newState.dog.isFavorite {
-                newState.dog.isFavorite = false
-                await environment.removeFromFavorites(dog: newState.dog)
-                return newState
-            }
-            newState.dog.isFavorite = true
-            await environment.addToFavorites(dog: newState.dog)
-            return newState
+            await tapFavorite(state, environment)
         case .tapShare:
-            newState.isSharing = true
+            share(state)
+        }
+    }
+    
+    private func tapFavorite(_ state: DogDetailsState, _ environment: DogDetailsEnvironment) async -> DogDetailsState {
+        var newState = state
+        if newState.dog.isFavorite {
+            newState.dog.isFavorite = false
+            await environment.removeFromFavorites(dog: newState.dog)
             return newState
         }
+        newState.dog.isFavorite = true
+        await environment.addToFavorites(dog: newState.dog)
+        return newState
+    }
+    
+    private func share(_ state: DogDetailsState) -> DogDetailsState {
+        var newState = state
+        newState.isSharing = true
+        return newState
     }
 }
