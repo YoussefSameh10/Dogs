@@ -9,13 +9,13 @@ struct BreedsReducer {
     func reduce(_ state: BreedsState, _ action: BreedsAction, _ environment: BreedsEnvironment) async -> BreedsState {
         switch action {
         case .onAppear:
-            return await fetchBreeds(state, environment)
+            await fetchBreeds(state, environment)
         case .loaded(let breeds):
-            return await setBreeds(breeds, state, environment)
+            await setBreeds(breeds, state, environment)
         case .open(let breed):
-            return await tapBreed(breed, state, environment)
+            await tapBreed(breed, state, environment)
         case .search(let text):
-            return await applySearch(text, state)
+            await applySearch(text, state)
         }
     }
     

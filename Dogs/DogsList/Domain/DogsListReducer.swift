@@ -9,15 +9,15 @@ struct DogsListReducer {
     func reduce(_ state: DogsListState, _ action: DogsListAction, _ environment: DogsListEnvironment) async -> DogsListState {
         switch action {
         case .onAppear:
-            return await fetchDogs(state, environment)
+            await fetchDogs(state, environment)
         case .loaded(let dogs):
-            return setDogs(dogs, state)
+            setDogs(dogs, state)
         case .tapDog(let dog):
-            return await tapDog(dog, state, environment)
+            await tapDog(dog, state, environment)
         case .tapFavorites(let dog):
-            return await tapFavorite(dog, state, environment)
+            await tapFavorite(dog, state, environment)
         case .onDisappear:
-            return await cancel(state, environment)
+            await cancel(state, environment)
         }
     }
     
