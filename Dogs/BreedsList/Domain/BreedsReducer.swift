@@ -7,32 +7,50 @@
 
 struct BreedsReducer {
     func reduce(_ state: BreedsState, _ action: BreedsAction, _ environment: BreedsEnvironment) async -> BreedsState {
-        var newState = state
         switch action {
         case .onAppear:
-            do {
-                let breeds = try await environment.fetchBreeds()
-                return await reduce(newState, .loaded(breeds), environment)
-            } catch let error as BreedsError {
-                await environment.handleError(error)
-                newState.isLoading = false
-                return newState
-            } catch {
-                await environment.handleError(BreedsError.unknown)
-                newState.isLoading = false
-                return newState
-            }
+            return await fetchBreeds(state, environment)
         case .loaded(let breeds):
-            newState.breeds = group(breeds)
-            newState.isLoading = false
-            return await reduce(newState, .search(newState.searchText), environment)
+            return await setBreeds(breeds, state, environment)
         case .open(let breed):
-            await environment.goNext(breed: breed)
-            return newState
+            return await tapBreed(breed, state, environment)
         case .search(let text):
-            newState.filteredBreeds = filter(newState.breeds, by: text)
+            return await applySearch(text, state)
+        }
+    }
+    
+    private func fetchBreeds(_ state: BreedsState, _ environment: BreedsEnvironment) async -> BreedsState {
+        var newState = state
+        do {
+            let breeds = try await environment.fetchBreeds()
+            return await reduce(newState, .loaded(breeds), environment)
+        } catch let error as BreedsError {
+            await environment.handleError(error)
+            newState.isLoading = false
+            return newState
+        } catch {
+            await environment.handleError(BreedsError.unknown)
+            newState.isLoading = false
             return newState
         }
+    }
+    
+    private func setBreeds(_ breeds: [BreedModel], _ state: BreedsState, _ environment: BreedsEnvironment) async -> BreedsState {
+        var newState = state
+        newState.breeds = group(breeds)
+        newState.isLoading = false
+        return await reduce(newState, .search(newState.searchText), environment)
+    }
+    
+    private func tapBreed(_ breed: BreedModel, _ state: BreedsState, _ environment: BreedsEnvironment) async -> BreedsState {
+        await environment.goNext(breed: breed)
+        return state
+    }
+    
+    private func applySearch(_ searchText: String, _ state: BreedsState) async -> BreedsState {
+        var newState = state
+        newState.filteredBreeds = filter(newState.breeds, by: searchText)
+        return newState
     }
     
     private func group(_ breeds: [BreedModel]) -> [String: [BreedModel]] {
