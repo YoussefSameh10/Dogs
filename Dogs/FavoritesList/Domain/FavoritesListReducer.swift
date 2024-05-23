@@ -7,28 +7,47 @@
 
 struct FavoritesListReducer {
     func reduce(_ state: FavoritesListState, _ action: FavoritesListAction, _ environment: FavoritesListEnvironment) async -> FavoritesListState {
-        var newState = state
         switch action {
         case .onAppear:
-            let dogs = await environment.getFavoriteDogs()
-            newState.isLoading = true
-            return await reduce(newState, .loaded(dogs), environment)
+            await fetchFavoriteDogs(state, environment)
         case .loaded(let dogs):
-            newState.isLoading = false
-            newState.favoriteDogs = dogs
-            return newState
+            setDogs(dogs, state)
         case .tapDog(let dog):
-            await environment.goNext(dog: dog)
-            return newState
+            await tapDog(dog, state, environment)
         case .tapFavorite(let dog):
-            if newState.favoriteDogs.contains(where: { $0 == dog }) {
-                newState.favoriteDogs.removeAll(where: { $0 == dog })
-                await environment.removeFromFavorites(dog: dog)
-                return newState
-            }
-            newState.favoriteDogs.append(dog)
-            await environment.addToFavorites(dog: dog)
+            await tapFavorite(dog, state, environment)
+        }
+    }
+    
+    private func fetchFavoriteDogs(_ state: FavoritesListState, _ environment: FavoritesListEnvironment) async -> FavoritesListState {
+        var newState = state
+        let dogs = await environment.getFavoriteDogs()
+        newState.isLoading = true
+        return await reduce(newState, .loaded(dogs), environment)
+    }
+    
+    private func setDogs(_ dogs: [DogModel], _ state: FavoritesListState) -> FavoritesListState {
+        var newState = state
+        newState.isLoading = false
+        newState.favoriteDogs = dogs
+        return newState
+    }
+    
+    private func tapDog(_ dog: DogModel, _ state: FavoritesListState, _ environment: FavoritesListEnvironment) async -> FavoritesListState {
+        var newState = state
+        await environment.goNext(dog: dog)
+        return newState
+    }
+    
+    private func tapFavorite(_ dog: DogModel, _ state: FavoritesListState, _ environment: FavoritesListEnvironment) async -> FavoritesListState {
+        var newState = state
+        if newState.favoriteDogs.contains(where: { $0 == dog }) {
+            newState.favoriteDogs.removeAll(where: { $0 == dog })
+            await environment.removeFromFavorites(dog: dog)
             return newState
         }
+        newState.favoriteDogs.append(dog)
+        await environment.addToFavorites(dog: dog)
+        return newState
     }
 }
